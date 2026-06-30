@@ -58,7 +58,6 @@ const Footer = () => {
       />
       
       <VStack
-        className="section-shell"
         position="relative"
         zIndex={10}
         maxW="7xl"
