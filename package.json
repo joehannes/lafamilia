@@ -31,7 +31,6 @@
     "vite": "^4.5.14"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^5.1.2",

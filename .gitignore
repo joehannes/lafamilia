@@ -1,25 +1,12 @@
 ```
+# Build artifacts
+*.mjs
+*.timestamp-*
+
 # Dependencies
 node_modules/
+package-lock.json
 
-# Build outputs
-dist/
-build/
-*.tsbuildinfo
-
-# Environment
-.env
-.env.local
-.env.*
-
-# Logs
-*.log
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
+# Development
+.vite/
 ```
