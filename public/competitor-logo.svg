@@ -1,0 +1,25 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#17b6a8" opacity="0.1" stroke="#17b6a8" stroke-width="2"/>
+  
+  <!-- Wave pattern -->
+  <path d="M 40 120 Q 60 110, 80 120 T 120 120 T 160 120" stroke="#17b6a8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 40 140 Q 60 130, 80 140 T 120 140 T 160 140" stroke="#0f9f8e" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+  
+  <!-- Sun -->
+  <circle cx="100" cy="60" r="20" fill="#f6aa5c"/>
+  <circle cx="100" cy="60" r="18" fill="#ffc677"/>
+  
+  <!-- Palm tree accent -->
+  <line x1="100" y1="80" x2="100" y2="120" stroke="#0f9f8e" stroke-width="2.5"/>
+  <path d="M 85 85 Q 80 75, 75 70" stroke="#0f9f8e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 115 85 Q 120 75, 125 70" stroke="#0f9f8e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 85 92 Q 75 85, 70 80" stroke="#0f9f8e" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 115 92 Q 125 85, 130 80" stroke="#0f9f8e" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  
+  <!-- Accent dots -->
+  <circle cx="60" cy="50" r="3" fill="#f6aa5c" opacity="0.6"/>
+  <circle cx="140" cy="55" r="3" fill="#17b6a8" opacity="0.6"/>
+  <circle cx="65" cy="160" r="2.5" fill="#0f9f8e" opacity="0.5"/>
+  <circle cx="135" cy="155" r="2.5" fill="#f6aa5c" opacity="0.5"/>
+</svg>

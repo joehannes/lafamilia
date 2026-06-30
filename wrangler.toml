@@ -1,0 +1,53 @@
+name = "punta-cana-adventures"
+compatibility_date = "2024-05-01"
+pages_build_output_dir = "dist"
+
+# KV namespace binding is configured via Cloudflare Pages dashboard:
+#   Settings → Functions → KV namespace bindings → Add binding
+#   Variable name: DATA_KV
+#   KV namespace: (your KV namespace)
+# Do NOT add [[kv_namespaces]] here — Pages builds validate the IDs
+# and will fail if they are not valid hex strings.
+
+# ==============================================================================
+# Environment variables (Cloudflare Pages dashboard overrides these in production)
+# ==============================================================================
+#
+# Set these in your Cloudflare Pages dashboard:
+#   Settings → Environment variables → Production
+#
+# All VITE_* variables are also needed as Pages environment variables
+# so they are available to both the Vite build and the Functions runtime.
+#
+# Additionally, set these non-VITE variables:
+#   INIT_DATA_SECRET = "your-secret"
+#   INIT_DATA_URL    = "https://your-project.pages.dev/api/init-data"
+
+[vars]
+ADMIN_PASSWORD = "mariotours"
+VITE_ADMIN_PASSWORD = "mariotours"
+CLOUDINARY_CLOUD_NAME = "dkxlhxpe4"
+CLOUDINARY_API_KEY = "896279918126553"
+CLOUDINARY_API_SECRET = "stWvhkCOQi_2Q_Ko0d1it8LXWr8"
+CLOUDINARY_UPLOAD_PRESET =""
+VITE_CLOUDINARY_CLOUD_NAME = "dkxlhxpe4"
+VITE_CLOUDINARY_API_KEY = "896279918126553"
+VITE_CLOUDINARY_API_SECRET = "stWvhkCOQi_2Q_Ko0d1it8LXWr8"
+VITE_CLOUDINARY_UPLOAD_PRESET =""
+
+[[env.production.kv_namespaces]]
+binding = "DATA_KV_M"
+id = "47b690e5db594d6a9638e793da63e631"
+
+[env.production.vars]
+ADMIN_PASSWORD = "mariotours"
+VITE_ADMIN_PASSWORD = "mariotours"
+CLOUDINARY_CLOUD_NAME = "dkxlhxpe4"
+CLOUDINARY_API_KEY = "896279918126553"
+CLOUDINARY_API_SECRET = "stWvhkCOQi_2Q_Ko0d1it8LXWr8"
+CLOUDINARY_UPLOAD_PRESET =""
+VITE_CLOUDINARY_CLOUD_NAME = "dkxlhxpe4"
+VITE_CLOUDINARY_API_KEY = "896279918126553"
+VITE_CLOUDINARY_API_SECRET = "stWvhkCOQi_2Q_Ko0d1it8LXWr8"
+VITE_CLOUDINARY_UPLOAD_PRESET =""
+

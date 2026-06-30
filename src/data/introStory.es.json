@@ -1,0 +1,116 @@
+{
+  "storyTitle": "Tu Día Perfecto en el Paraíso",
+  "storyTagline": "De la calma de la playa a la energía de la selva, descubre por qué los viajeros aman Bávaro",
+  "sections": [
+    {
+      "id": "morning",
+      "title": "El Despertar de la Hora Dorada",
+      "emoji": "☀️",
+      "timeframe": "6:30 AM - 10:00 AM",
+      "description": "Te despiertas con el sonido de las olas y una brisa caribeña suave. Después de unos días de descanso en la playa, el cuerpo pide algo fresco: aire libre, agua turquesa, sabor local y un poco de movimiento fuera del resort.",
+      "narrative": "La luz de la mañana pinta el océano de oro mientras tomas tu café. Tu familia o amigos todavía empiezan el día con calma, pero tú ya imaginas unas horas hermosas afuera: sin prisa, sin agotarte, llenas de vida, fáciles e inolvidables.",
+      "imageUrl": "https://images.unsplash.com/photo-1505881402582-c5bc9105fc73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      "mood": "curioso, energizado, listo"
+    },
+    {
+      "id": "decision",
+      "title": "La Pregunta que Todo Viajero se Hace",
+      "emoji": "🤔",
+      "timeframe": "Media Mañana",
+      "description": "¿Deberíamos hacer algo más?\n\nQuizás estás con tu pareja y quieres un momento romántico lejos del resort. Quizás tus amigos buscan una historia para recordar. Quizás la familia necesita un día compartido, simple y real.",
+      "narrative": "Lo entendemos. Viniste a descansar. Pero un gran viaje puede tener ambas cosas: la silla de playa en la mañana, una ruta local en la tarde y un recuerdo que se siente completamente tuyo.",
+      "imageUrl": "/imgs/tours/tour_montaa_redonda_detail_7.jpg",
+      "mood": "contemplativo, esperanzado"
+    },
+    {
+      "id": "adventure_preview",
+      "title": "Tres Formas Hermosas de Explorar",
+      "emoji": "⚡",
+      "description": "No tienes que elegir entre relajación y aventura. Estas experiencias seleccionadas te permiten salir unas horas y regresar con brisa salada, risas y una historia más luminosa.",
+      "adventures": [
+        {
+          "id": "buggy",
+          "title": "Ritmo Salvaje: Aventura en Quad 4x4",
+          "emoji": "🏜️",
+          "duration": "4-5 horas",
+          "vibe": "Adrenalina, Naturaleza, Libertad",
+          "description": "El lodo vuela, tu quad vibra y el camino se abre entre paisajes verdes dominicanos. Un cenote fresco espera en la ruta antes de volver sonriendo, con polvo y energía.",
+          "highlights": [
+            "Senderos fuera de carretera por la auténtica selva dominicana",
+            "Visita a un cenote natural oculto para nadar",
+            "Guías profesionales con años de conocimiento local",
+            "Perfecto para aventureros, parejas y grupos"
+          ],
+          "bestFor": "Parejas aventureras, grupos de amigos, familias con niños mayores",
+          "vimeoUrl": "https://vimeo.com/example-buggy",
+          "imageUrl": "/imgs/tours/tour_buggies_detail_15.jpg",
+          "mood": "Salvaje, Libre, Imparable"
+        },
+        {
+          "id": "party_boat",
+          "title": "Vibra Caribeña: Barco Fiesta Saona",
+          "emoji": "🎉",
+          "duration": "6-7 horas",
+          "vibe": "Social, Música, Pura Alegría",
+          "description": "Estás en un catamarán con música alegre, sol cálido y agua turquesa. Tus amigos ríen, la gente nueva se siente cercana y la costa se ve mejor con cada milla.",
+          "highlights": [
+            "Aventura en barco de día completo a Isla Saona",
+            "Snorkel en piscinas naturales prístinas",
+            "Almuerzo dominicano fresco y bebidas premium incluidas",
+            "Tiempo en playa de arena blanca intacta",
+            "Música, baile y genuina hospitalidad caribeña"
+          ],
+          "bestFor": "Grupos de amigos, parejas románticas, familias buscando aventura social",
+          "vimeoUrl": "https://vimeo.com/example-boat",
+          "imageUrl": "/imgs/tours/tour_party_boat_detail_11.jpg",
+          "mood": "Eufórico, Conectado, Inolvidable"
+        },
+        {
+          "id": "waterfall",
+          "title": "Serenidad Selvática: Cascadas de Samaná",
+          "emoji": "🌊",
+          "duration": "5-6 horas",
+          "vibe": "Naturaleza, Calma, Romántico",
+          "description": "Caminas bajo un dosel tropical mientras el sonido del agua se acerca. Luego aparece la cascada, cayendo sobre una piscina natural clara donde el aire se siente fresco y tranquilo.",
+          "highlights": [
+            "Viaje a las espectaculares cascadas de Samaná",
+            "Caminata por la selva tropical prístina",
+            "Nado en piscinas naturales cristalinas",
+            "Momentos fotográficos perfectos en escenarios naturales",
+            "Expertise de guía local sobre flora, fauna y cultura"
+          ],
+          "bestFor": "Parejas (increíblemente romántico), familias, amantes de la naturaleza, fotógrafos",
+          "vimeoUrl": "https://vimeo.com/example-waterfall",
+          "imageUrl": "/imgs/tours/tour_saman_detail_9.jpg",
+          "mood": "Pacífico, Fresco, Romántico"
+        }
+      ]
+    },
+    {
+      "id": "afternoon_post",
+      "title": "El Brillo de la Tarde",
+      "emoji": "🌅",
+      "description": "Estás de vuelta en el resort, bronceado y contento. Tomas una bebida fría, encuentras una silla de playa y dejas que el día repose. Lo mejor es simple: hiciste más que quedarte, sentiste el lugar.",
+      "narrative": "Unas horas afuera se convirtieron en el recuerdo al que todos vuelven. Tus amigos siguen riendo, tu familia ya piensa en la próxima ruta y el día se siente completo a la manera caribeña.",
+      "imageUrl": "/imgs/tours/tour_isla_saona_vip_detail_8.jpg",
+      "mood": "satisfecho, vivo, agradecido"
+    }
+  ],
+  "callToActions": [
+    {
+      "text": "Comienza tu Aventura en la Selva",
+      "target": "buggy",
+      "action": "scroll-to"
+    },
+    {
+      "text": "Reserva el Barco Fiesta",
+      "target": "party_boat",
+      "action": "contact"
+    },
+    {
+      "text": "Descubre las Cascadas de Samaná",
+      "target": "waterfall",
+      "action": "scroll-to"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mariotours",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-04",
+  "observability": {
+    "enabled": true,
+  },
+
+  // Add this to your wrangler.jsonc
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "341c4ac0817a40bbb87c94dcb1525114",
+
+      // Optional: preview_id used when running `wrangler dev` for local dev
+      "preview_id": "",
+    },
+  ],
+}

@@ -1,0 +1,168 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "tours": "Tours",
+    "transport": "Transporte",
+    "blog": "Blog",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Descubre {brand}",
+    "subtitle": "Excursiones cálidas y sencillas para días hermosos en Bávaro, Punta Cana y la costa dominicana.",
+    "cta": "Ver Excursiones"
+  },
+  "features": {
+    "title": "Por qué nos eligen",
+    "safety": {
+      "title": "Seguridad Primero",
+      "description": "Guías experimentados, operadores certificados y logística segura en cada ruta."
+    },
+    "experiences": {
+      "title": "Días Bien Planificados",
+      "description": "Actividades seleccionadas con equilibrio entre comodidad, cultura, naturaleza y aventura tranquila."
+    },
+    "transportation": {
+      "title": "Transporte Sin Estrés",
+      "description": "Servicio confiable de recogida y regreso en Bávaro y Punta Cana."
+    }
+  },
+  "tours": {
+    "title": "Nuestras Excursiones",
+    "subtitle": "Explora aventuras premium en Bávaro con {brand}.",
+    "bookNow": "Reservar por WhatsApp",
+    "dateLabel": "Selecciona tu fecha preferida",
+    "dynamicSubtitle": "Explora aventuras premium en Bávaro con {brand}."
+  },
+  "payment": {
+    "paypal": "Pagar con PayPal",
+    "paypalContact": "Pagar depósito con PayPal",
+    "verifone": "Pagar con Verifone",
+    "verifoneContact": "Pagar depósito con Verifone",
+    "total": "Total a pagar"
+  },
+  "parallax": {
+    "title": "Mar, Jungla y Energía Caribeña",
+    "subtitle": "Desde la brisa del mar hasta paisajes del interior, cada tour es memorable."
+  },
+  "testimonials": {
+    "title": "Opiniones de nuestros viajeros",
+    "addTestimonial": "Comparte Tu Historia",
+    "yourName": "Tu Nombre",
+    "yourReview": "¿Cuál fue tu aventura favorita?",
+    "submitReview": "Compartir Tu Opinión",
+    "loginWithGoogle": "Inicia sesión con Google",
+    "noTestimonials": "¡Sé el primero en compartir tu aventura!"
+  },
+  "story": {
+    "readMore": "Leer Historia Completa",
+    "learnMore": "Aprende Más",
+    "bookNow": "Reserva Esta Aventura",
+    "contactUs": "Contáctanos",
+    "duration": "Duración",
+    "vibes": "Vibra",
+    "bestFor": "Perfecto para",
+    "highlights": "Destacados"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Historias y consejos sobre {brand}, tours y viajes para tu aventura en Punta Cana.",
+    "relatedTourLabel": "Tour relacionado",
+    "error": "No se pudo cargar el contenido del blog en este momento.",
+    "noArticles": "No hay artículos disponibles todavía. Vuelve a consultar más tarde."
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "description": "Indícanos tu fecha, tamaño del grupo y excursión preferida. Te respondemos rápido.",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "sent": "¡Mensaje Enviado!",
+    "getInTouch": "Hablemos",
+    "addressLabel": "Dirección",
+    "phoneLabel": "Teléfono",
+    "phoneNumber": "Teléfono: {phone}"
+  },
+  "footer": {
+    "company": "{brand}",
+    "description": "Tu puerta cercana a playas, islas, cascadas y días tropicales sin complicaciones en República Dominicana.",
+    "quickLinks": "Enlaces Rápidos",
+    "home": "Inicio",
+    "tours": "Tours",
+    "contact": "Contacto",
+    "admin": "Admin",
+    "copyright": "© {year} Todos los derechos reservados.",
+    "transport": "Transporte"
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "passwordPrompt": "Ingresa la contraseña de administrador:",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "addTour": "Agregar Nuevo Tour",
+    "editTour": "Editar Tour",
+    "deleteTour": "Eliminar Tour",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "tourTitle": "Título",
+    "description": "Descripción",
+    "price": "Precio",
+    "image": "URL de Imagen",
+    "uploadImage": "Subir Imagen",
+    "confirmDelete": "¿Estás seguro de que quieres eliminar este tour?"
+  },
+  "whatsapp": {
+    "english": "Hello, I'm interested in the {tour} tour{date}. Please send me more information and the price.",
+    "spanish": "Hola, estoy interesado/a en el tour {tour}{date}. ¿Podría enviarme más información y el precio?",
+    "dateSegment": " para el ",
+    "selectedDateEnglish": "Preferred date: {date}",
+    "selectedDateSpanish": "Fecha preferida: {date}",
+    "quantities": "Participantes: {summary}",
+    "quantitiesSpanish": "Guests: {summary}"
+  },
+  "transport": {
+    "title": "Traslados Aeropuerto",
+    "subtitle": "Traslados privados desde el Aeropuerto de Punta Cana (PUJ) a cualquier destino. Confiable, cómodo y accesible.",
+    "pickupDropoff": "Recogida y Entrega",
+    "origin": "Lugar de recogida",
+    "destination": "Lugar de entrega",
+    "tripType": "Tipo de viaje",
+    "roundTrip": "Ida y Vuelta",
+    "oneWay": "Solo Ida",
+    "dateTime": "Fecha y Hora",
+    "vehicleAndPassengers": "Vehículo y Pasajeros",
+    "vehicleType": "Tipo de vehículo",
+    "passengers": "Pasajeros",
+    "vehicleCapacity": "Capacidad: {min}–{max} pasajeros",
+    "extras": "Extras",
+    "nightTransfer": "Traslado Nocturno",
+    "locationInfo": "Detalles de ubicación",
+    "flightNumber": "Número de vuelo",
+    "hotelName": "Hotel / Resort",
+    "notes": "Notas",
+    "priceSummary": "Resumen de precio",
+    "estimatedPrice": "Precio total estimado",
+    "roundTripIncluded": "Ida y vuelta (ambos sentidos)",
+    "oneWayTrip": "Traslado solo ida",
+    "distance": "Distancia",
+    "duration": "Tiempo estimado de viaje",
+    "nightFee": "Cargo nocturno",
+    "distanceDiscount": "Descuento por distancia",
+    "doubleVehicle": "Vehículo doble",
+    "fillFields": "Selecciona recogida, entrega y vehículo para ver el precio",
+    "bookNow": "Reservar por WhatsApp",
+    "chatOnWhatsApp": "Chat / Pregunta",
+    "configError": "No se puede cargar la configuración de traslado. Por favor intenta más tarde.",
+    "twoVehiclesNeeded": "Precio doble aplicado: el número de pasajeros supera la capacidad típica"
+  },
+  "details": {
+    "view": "Ver detalles",
+    "back": "← Volver al listado",
+    "description": "Descripción",
+    "includes": "Incluye",
+    "notIncluded": "No incluido",
+    "notFound": "No se pudieron encontrar los detalles del servicio.",
+    "pricing": "Precios"
+  }
+}

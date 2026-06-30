@@ -1,0 +1,277 @@
+{
+  "airport": "PUJ",
+  "currency": "USD",
+  "vehicleTypes": [
+    {
+      "key": "sedan",
+      "label": "Economy Sedan",
+      "multiplier": 1,
+      "pricePerKmMultiplier": 1,
+      "passengerThreshold": 4,
+      "passengerMultiplier": 2,
+      "maxPassengers": 3,
+      "typicalPassengers": [1, 3],
+      "description": "Perfect for 1–3 travelers with light luggage",
+      "image": "https://res.cloudinary.com/dkxlhxpe4/image/upload/v1779407712/transport_vehicles/xgi1geujrnyh771z9ehu.jpg"
+    },
+    {
+      "key": "suv",
+      "label": "SUV / Family",
+      "multiplier": 1.35,
+      "pricePerKmMultiplier": 1.05,
+      "passengerThreshold": 6,
+      "passengerMultiplier": 2,
+      "maxPassengers": 5,
+      "typicalPassengers": [3, 5],
+      "description": "Spacious for families or groups up to 5",
+      "image": ""
+    },
+    {
+      "key": "minivan",
+      "label": "Minivan",
+      "multiplier": 1.65,
+      "pricePerKmMultiplier": 1.1,
+      "passengerThreshold": 9,
+      "passengerMultiplier": 2,
+      "maxPassengers": 8,
+      "typicalPassengers": [5, 7],
+      "description": "Comfortable for medium groups up to 7",
+      "image": ""
+    },
+    {
+      "key": "sprinter",
+      "label": "Sprinter / Group Van",
+      "multiplier": 2.2,
+      "pricePerKmMultiplier": 1.2,
+      "passengerThreshold": 15,
+      "passengerMultiplier": 2,
+      "maxPassengers": 14,
+      "typicalPassengers": [8, 14],
+      "description": "Ideal for larger groups up to 14",
+      "image": ""
+    },
+    {
+      "key": "minibus",
+      "label": "Mini Bus",
+      "multiplier": 3.2,
+      "pricePerKmMultiplier": 1.3,
+      "passengerThreshold": 25,
+      "passengerMultiplier": 2,
+      "maxPassengers": 24,
+      "typicalPassengers": [15, 24],
+      "description": "Best for large groups up to 24",
+      "image": ""
+    },
+    {
+      "key": "coach_bus",
+      "label": "Coach Bus",
+      "multiplier": 5.5,
+      "pricePerKmMultiplier": 1.5,
+      "passengerThreshold": 56,
+      "passengerMultiplier": 2,
+      "maxPassengers": 55,
+      "typicalPassengers": [25, 55],
+      "description": "Full-size coach for 25+ passengers",
+      "image": ""
+    },
+    {
+      "key": "vip_sports",
+      "label": "VIP / Sports Luxury",
+      "multiplier": 2.8,
+      "pricePerKmMultiplier": 1.6,
+      "passengerThreshold": 4,
+      "passengerMultiplier": 2,
+      "maxPassengers": 3,
+      "typicalPassengers": [1, 2],
+      "description": "Premium luxury experience for special occasions",
+      "image": ""
+    },
+    {
+      "key": "luxury_suv",
+      "label": "Luxury SUV",
+      "multiplier": 2.1,
+      "pricePerKmMultiplier": 1.25,
+      "passengerThreshold": 6,
+      "passengerMultiplier": 2,
+      "maxPassengers": 5,
+      "typicalPassengers": [2, 5],
+      "description": "Premium SUV with extra comfort and space",
+      "image": ""
+    }
+  ],
+  "zones": [
+    {
+      "key": "bavaro",
+      "label": "Bávaro",
+      "kmApprox": 18,
+      "basePrice": 32,
+      "difficulty": 1,
+      "premium": false
+    },
+    {
+      "key": "el_cortecito",
+      "label": "El Cortecito / Los Corales",
+      "kmApprox": 20,
+      "basePrice": 35,
+      "difficulty": 1,
+      "premium": false
+    },
+    {
+      "key": "arena_gorda",
+      "label": "Arena Gorda",
+      "kmApprox": 24,
+      "basePrice": 38,
+      "difficulty": 1.05,
+      "premium": false
+    },
+    {
+      "key": "cabeza_de_toro",
+      "label": "Cabeza de Toro",
+      "kmApprox": 12,
+      "basePrice": 28,
+      "difficulty": 0.95,
+      "premium": false
+    },
+    {
+      "key": "punta_cana_village",
+      "label": "Punta Cana Village",
+      "kmApprox": 8,
+      "basePrice": 25,
+      "difficulty": 0.9,
+      "premium": false
+    },
+    {
+      "key": "cap_cana",
+      "label": "Cap Cana",
+      "kmApprox": 12,
+      "basePrice": 35,
+      "difficulty": 1.15,
+      "premium": true
+    },
+    {
+      "key": "juanillo",
+      "label": "Juanillo / Luxury Villas",
+      "kmApprox": 18,
+      "basePrice": 42,
+      "difficulty": 1.2,
+      "premium": true
+    },
+    {
+      "key": "uvero_alto",
+      "label": "Uvero Alto",
+      "kmApprox": 42,
+      "basePrice": 55,
+      "difficulty": 1.2,
+      "premium": false
+    },
+    {
+      "key": "macao",
+      "label": "Macao",
+      "kmApprox": 38,
+      "basePrice": 50,
+      "difficulty": 1.15,
+      "premium": false
+    },
+    {
+      "key": "bayahibe",
+      "label": "Bayahibe",
+      "kmApprox": 72,
+      "basePrice": 105,
+      "difficulty": 1.15,
+      "premium": false
+    },
+    {
+      "key": "la_romana",
+      "label": "La Romana",
+      "kmApprox": 82,
+      "basePrice": 115,
+      "difficulty": 1.15,
+      "premium": false
+    },
+    {
+      "key": "casa_de_campo",
+      "label": "Casa de Campo",
+      "kmApprox": 85,
+      "basePrice": 145,
+      "difficulty": 1.3,
+      "premium": true
+    },
+    {
+      "key": "miches",
+      "label": "Miches",
+      "kmApprox": 95,
+      "basePrice": 135,
+      "difficulty": 1.25,
+      "premium": false
+    },
+    {
+      "key": "samana",
+      "label": "Samaná",
+      "kmApprox": 300,
+      "basePrice": 320,
+      "difficulty": 1.35,
+      "premium": false
+    },
+    {
+      "key": "las_terrenas",
+      "label": "Las Terrenas",
+      "kmApprox": 285,
+      "basePrice": 340,
+      "difficulty": 1.4,
+      "premium": true
+    },
+    {
+      "key": "santo_domingo",
+      "label": "Santo Domingo",
+      "kmApprox": 195,
+      "basePrice": 220,
+      "difficulty": 1.25,
+      "premium": false
+    },
+    {
+      "key": "zona_colonial",
+      "label": "Zona Colonial",
+      "kmApprox": 205,
+      "basePrice": 235,
+      "difficulty": 1.3,
+      "premium": true
+    },
+    {
+      "key": "puerto_plata",
+      "label": "Puerto Plata",
+      "kmApprox": 400,
+      "basePrice": 420,
+      "difficulty": 1.45,
+      "premium": false
+    },
+    {
+      "key": "sosua",
+      "label": "Sosúa",
+      "kmApprox": 410,
+      "basePrice": 435,
+      "difficulty": 1.45,
+      "premium": false
+    },
+    {
+      "key": "cabarete",
+      "label": "Cabarete",
+      "kmApprox": 425,
+      "basePrice": 445,
+      "difficulty": 1.5,
+      "premium": false
+    }
+  ],
+  "modifiers": {
+    "pricePerKm": 1.35,
+    "minimumPrice": 25,
+    "roundTripDiscount": 0.9,
+    "nightFeeMultiplier": 1.15,
+    "waitingPerHour": 20,
+    "childSeat": 10,
+    "premiumZoneBoost": 1.1,
+    "fuelVolatility": 1,
+    "priceMarkup": 1.21,
+    "distanceDiscountMaxPercent": 50,
+    "distanceDiscountSaturationKm": 30
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "storyTitle": "Your Perfect Day in Paradise",
+  "storyTagline": "From beach calm to jungle energy, discover why travelers love Bavaro",
+  "sections": [
+    {
+      "id": "morning",
+      "title": "The Golden Hour Awakening",
+      "emoji": "☀️",
+      "timeframe": "6:30 AM - 10:00 AM",
+      "description": "You wake up to the sound of waves and a soft Caribbean breeze. After a few restful beach days, your body is ready for something fresh: open air, turquoise water, local flavor, and a little movement beyond the resort.",
+      "narrative": "Morning light turns the ocean gold as you sip your coffee. Your family or friends are still easing into the day, but you are already picturing a few beautiful hours outside: not rushed, not exhausting, just vivid, easy, and memorable.",
+      "imageUrl": "https://images.unsplash.com/photo-1505881402582-c5bc9105fc73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      "mood": "curious, energized, ready"
+    },
+    {
+      "id": "decision",
+      "title": "The Question Every Traveler Asks",
+      "emoji": "🤔",
+      "timeframe": "Late Morning",
+      "description": "Should we do something more?\n\nMaybe you are with your partner and want a quiet romantic moment away from the resort. Maybe your friends want a story worth retelling. Maybe the family needs a day that feels shared, simple, and real.",
+      "narrative": "We get it. You came here to rest. But a great trip can hold both comfort and discovery: the beach chair in the morning, a local route in the afternoon, and a memory that feels entirely your own.",
+      "imageUrl": "/imgs/tours/tour_montaa_redonda_detail_7.jpg",
+      "mood": "contemplative, hopeful"
+    },
+    {
+      "id": "adventure_preview",
+      "title": "Three Beautiful Ways to Explore",
+      "emoji": "⚡",
+      "description": "You do not have to choose between relaxation and adventure. These handpicked experiences make it easy to step out for a few hours and return with salt air, laughter, and a brighter story.",
+      "adventures": [
+        {
+          "id": "buggy",
+          "title": "Jungle Boogie: 4x4 Quad Adventure",
+          "emoji": "🏜️",
+          "duration": "4-5 hours",
+          "vibe": "Adrenaline, Nature, Freedom",
+          "description": "Mud flies, your quad hums, and the trail opens into green Dominican countryside. A cool cenote waits along the route before you ride back smiling, dusty, and fully awake.",
+          "highlights": [
+            "Off-road jungle trails through authentic Dominican terrain",
+            "Visit a hidden natural cenote for a cooling swim",
+            "Professional guides with years of local knowledge",
+            "Perfect for thrill-seekers, couples, and groups"
+          ],
+          "bestFor": "Adventure couples, friend groups, families with older kids",
+          "vimeoUrl": "https://vimeo.com/example-buggy",
+          "imageUrl": "/imgs/tours/tour_buggies_detail_15.jpg",
+          "mood": "Wild, Free, Unstoppable"
+        },
+        {
+          "id": "party_boat",
+          "title": "Caribbean Vibes: Party Boat Saona",
+          "emoji": "🎉",
+          "duration": "6-7 hours",
+          "vibe": "Social, Music, Pure Joy",
+          "description": "You are on a catamaran with bright music, warm sun, and impossibly turquoise water. Friends are laughing, new people feel familiar, and the shoreline looks better with every mile.",
+          "highlights": [
+            "Full-day boat adventure to Saona Island",
+            "Snorkeling in pristine natural pools",
+            "Fresh Dominican lunch and premium drinks included",
+            "Beach time on untouched white sand",
+            "Music, dancing, and genuine Caribbean hospitality"
+          ],
+          "bestFor": "Friend groups, romantic couples, families seeking social adventure",
+          "vimeoUrl": "https://vimeo.com/example-boat",
+          "imageUrl": "/imgs/tours/tour_party_boat_detail_11.jpg",
+          "mood": "Euphoric, Connected, Unforgettable"
+        },
+        {
+          "id": "waterfall",
+          "title": "Jungle Serenity: Samana Waterfalls",
+          "emoji": "🌊",
+          "duration": "5-6 hours",
+          "vibe": "Nature, Calm, Romantic",
+          "description": "You walk through lush jungle canopy as the sound of water grows closer. Then the waterfall appears, pouring into a clear natural pool where the air is cool, fresh, and peaceful.",
+          "highlights": [
+            "Journey to the stunning Samana waterfalls",
+            "Hike through pristine tropical jungle",
+            "Swim in crystal-clear natural pools",
+            "Perfect photo moments in lush natural settings",
+            "Local guide expertise on flora, fauna, and culture"
+          ],
+          "bestFor": "Couples (incredibly romantic), families, nature lovers, photographers",
+          "vimeoUrl": "https://vimeo.com/example-waterfall",
+          "imageUrl": "/imgs/tours/tour_saman_detail_9.jpg",
+          "mood": "Peaceful, Fresh, Romantic"
+        }
+      ]
+    },
+    {
+      "id": "afternoon_post",
+      "title": "The Afternoon Glow",
+      "emoji": "🌅",
+      "description": "You are back at the resort, sun-kissed and content. You grab a cold drink, find a lounge chair, and let the day settle in. The best part is simple: you did more than stay here, you felt the place.",
+      "narrative": "A few hours away became the memory everyone keeps returning to. Your friends are still laughing about it, your family is already choosing the next route, and the day feels complete in that easy Caribbean way.",
+      "imageUrl": "/imgs/tours/tour_isla_saona_vip_detail_8.jpg",
+      "mood": "satisfied, alive, grateful"
+    }
+  ],
+  "callToActions": [
+    {
+      "text": "Start Your Jungle Adventure",
+      "target": "buggy",
+      "action": "scroll-to"
+    },
+    {
+      "text": "Reserve the Party Boat",
+      "target": "party_boat",
+      "action": "contact"
+    },
+    {
+      "text": "Discover Samana Waterfalls",
+      "target": "waterfall",
+      "action": "scroll-to"
+    }
+  ]
+}

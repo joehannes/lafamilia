@@ -1,0 +1,28 @@
+# robots.txt for Caribbean Tours & Excursions Site
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Disallow checkout and cart pages (optional - prevents indexing of dynamic cart states)
+Disallow: /checkout
+Disallow: /cart
+
+# Allow crawling of images
+Allow: /images/
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+Allow: *.webp
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://bavaro.tours/sitemap.xml

@@ -1,0 +1,108 @@
+import React, { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { FaStar } from 'react-icons/fa';
+import TestimonialForm from './TestimonialForm';
+import { getTestimonials, saveTestimonials, TestimonialRecord } from '../services/testimonialService';
+
+interface TestimonialDisplayProps {
+  locale: string;
+}
+
+const TestimonialDisplay: React.FC<TestimonialDisplayProps> = ({ locale }) => {
+  const [testimonials, setTestimonials] = useState<TestimonialRecord[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const loadTestimonials = async () => {
+      const remoteTestimonials = await getTestimonials();
+      setTestimonials(remoteTestimonials);
+    };
+    loadTestimonials();
+  }, []);
+
+  const handleTestimonialSubmit = async (name: string, email: string, review: string, profileImage?: string) => {
+    setIsSubmitting(true);
+    try {
+      const newTestimonial: TestimonialRecord = {
+        id: Date.now().toString(),
+        name,
+        email,
+        review,
+        rating: 5,
+        profileImage,
+        createdAt: new Date().toISOString().split('T')[0]
+      };
+      const updated = [newTestimonial, ...testimonials];
+      setTestimonials(updated);
+      await saveTestimonials(updated);
+    } catch (error) {
+      console.error('Error submitting testimonial:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section className="home-section bay-section px-4 py-20 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            <FormattedMessage id="testimonials.title" />
+          </h2>
+          <p className="text-lg text-slate-600">
+            Join travelers who came home with brighter stories from the Caribbean
+          </p>
+        </div>
+
+        {/* Form */}
+        <div className="mb-16">
+          <TestimonialForm onSubmit={handleTestimonialSubmit} isLoading={isSubmitting} />
+        </div>
+
+        {/* Testimonials Grid */}
+        {testimonials.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="group rounded-[28px] border border-white/70 bg-white/80 p-7 shadow-[0_20px_60px_rgba(8,42,62,.14),0_8px_16px_rgba(23,182,168,.08)] backdrop-blur-sm transition-all hover:-translate-y-2 hover:shadow-[0_32px_88px_rgba(8,42,62,.2),0_12px_24px_rgba(23,182,168,.12)]"
+              >
+                {/* Rating */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, idx) => (
+                    <FaStar
+                      key={idx}
+                      className={`text-lg ${
+                        idx < testimonial.rating ? 'text-yellow-400' : 'text-slate-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Review */}
+                <p className="text-slate-700 mb-4 leading-relaxed italic">
+                  "{testimonial.review}"
+                </p>
+
+                {/* Author */}
+                <div className="border-t-2 border-slate-200 pt-4">
+                  <p className="font-bold text-slate-900">{testimonial.name}</p>
+                  <p className="text-sm text-slate-500">{testimonial.createdAt}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 bg-white rounded-2xl border-2 border-dashed border-orange-200">
+            <p className="text-slate-500 text-lg">
+              <FormattedMessage id="testimonials.noTestimonials" />
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default TestimonialDisplay;
