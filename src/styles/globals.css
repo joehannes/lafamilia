@@ -1,17 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
-/* Minimal CSS reset - Chakra UI handles most styling */
-* {
-  scroll-behavior: smooth;
+/* Chakra UI CSS Reset - Required for Chakra UI v3 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
   background: linear-gradient(180deg, #fff8f0 0%, #ffedd5 100%);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
+  font-family: "Inter", "system-ui", sans-serif;
 }
 
 /* Custom scrollbar for adventurous feel */

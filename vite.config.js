@@ -9,7 +9,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     chunkSizeWarningLimit: 2000,
-    minify: 'esbuild',
+    minify: false, // Disable minification to reduce memory usage during build
+    sourcemap: false, // Disable sourcemaps for production to reduce build size
     rollupOptions: {
       output: {
         manualChunks: {
