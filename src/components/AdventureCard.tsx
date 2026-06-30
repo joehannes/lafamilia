@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { FaPlayCircle, FaMapPin, FaClock, FaUsers } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import {
+  Box,
+  VStack,
+  HStack,
+  Heading,
+  Text,
+  Button,
+  Badge,
+  Image,
+  IconButton,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useBrand } from '../contexts/BrandContext';
 import { generateWhatsAppMessage } from '../utils/whatsapp';
 
@@ -47,142 +60,228 @@ const AdventureCard: React.FC<AdventureCardProps> = ({ adventure, onBook }) => {
   };
 
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-white/60 bg-white/80 shadow-[0_24_64px_rgba(8,42,62,.18),0_8px_16px_rgba(23,182,168,.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_36px_100px_rgba(8,42,62,.24),0_12px_24px_rgba(23,182,168,.14)] sm:rounded-[32px]">
-      {/* Image container with overlay */}
-      <div className="relative h-60 overflow-hidden bg-slate-200 sm:h-64 md:h-80">
-        <img
-          src={adventure.imageUrl}
-          alt={adventure.title}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Box
+        h="full"
+        display="flex"
+        flexDirection="column"
+        overflow="hidden"
+        borderRadius="3xl"
+        border="1px solid"
+        borderColor="whiteAlpha.600"
+        bg="whiteAlpha.800"
+        backdropFilter="blur(12px)"
+        boxShadow="0 24px 64px rgba(8,42,62,0.18), 0 8px 16px rgba(23,182,168,0.08)"
+        _hover={{
+          boxShadow: '0 36px 100px rgba(8,42,62,0.24), 0 12px 24px rgba(23,182,168,0.14)',
+        }}
+        transition="all 0.3s"
+      >
+        {/* Image container with overlay */}
+        <Box position="relative" h={{ base: '240px', sm: '256px', md: '320px' }} overflow="hidden" bg="slate.200">
+          <Image
+            src={adventure.imageUrl}
+            alt={adventure.title}
+            h="full"
+            w="full"
+            objectFit="cover"
+            transition="transform 0.7s"
+            sx={{
+              '&:hover': { transform: 'scale(1.10)' },
+            }}
+          />
+          {/* Gradient overlay */}
+          <Box
+            position="absolute"
+            inset={0}
+            bgGradient="linear(to-t, slate.950/85, slate.950/15, transparent)"
+            opacity={0}
+            _hover={{ opacity: 1 }}
+            transition="opacity 0.3s"
+          />
 
-        {/* Video button overlay */}
-        {!showVideo && (
-          <button
-            onClick={() => setShowVideo(true)}
-            className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100"
+          {/* Video button overlay */}
+          {!showVideo && (
+            <Button
+              position="absolute"
+              inset={0}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              opacity={0}
+              _hover={{ opacity: 1 }}
+              transition="opacity 0.3s"
+              variant="unstyled"
+              onClick={() => setShowVideo(true)}
+            >
+              <FaPlayCircle size="60px" color="white" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }} />
+            </Button>
+          )}
+
+          {/* Emoji badge */}
+          <Box
+            position="absolute"
+            right={4}
+            top={4}
+            borderRadius="full"
+            bg="whiteAlpha.900"
+            p={3}
+            fontSize="4xl"
+            boxShadow="lg"
+            backdropFilter="blur(12px)"
           >
-            <FaPlayCircle className="text-white text-6xl drop-shadow-lg hover:scale-110 transition-transform" />
-          </button>
+            {adventure.emoji}
+          </Box>
+        </Box>
+
+        {/* Video embed (hidden by default) */}
+        {showVideo && (
+          <Box position="relative" w="full" aspectRatio="16/9" bg="black">
+            <iframe
+              width="100%"
+              height="100%"
+              src={adventure.vimeoUrl.replace('vimeo.com', 'player.vimeo.com/video')}
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              title={adventure.title}
+            />
+            <IconButton
+              position="absolute"
+              top={2}
+              right={2}
+              zIndex={10}
+              aria-label="Close video"
+              icon={<span>✕</span>}
+              bg="red.600"
+              color="white"
+              size="sm"
+              _hover={{ bg: 'red.700' }}
+              onClick={() => setShowVideo(false)}
+            />
+          </Box>
         )}
 
-        {/* Emoji badge */}
-        <div className="absolute right-4 top-4 rounded-full bg-white/90 p-3 text-4xl shadow-lg backdrop-blur">
-          {adventure.emoji}
-        </div>
-      </div>
+        {/* Content */}
+        <VStack flex={1} align="stretch" p={{ base: 5, sm: 6 }} spacing={4}>
+          {/* Title */}
+          <Heading as="h3" size="xl" color="slate.900">
+            {adventure.title}
+          </Heading>
 
-      {/* Video embed (hidden by default) */}
-      {showVideo && (
-        <div className="relative w-full bg-black aspect-video">
-          <iframe
-            width="100%"
-            height="100%"
-            src={adventure.vimeoUrl.replace('vimeo.com', 'player.vimeo.com/video')}
-            frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            title={adventure.title}
-          />
-          <button
-            onClick={() => setShowVideo(false)}
-            className="absolute top-2 right-2 z-10 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm font-bold"
+          {/* Quick info */}
+          <HStack wrap="wrap" gap={4} fontSize="sm">
+            <HStack gap={1} fontWeight="semibold" color="teal.700">
+              <FaClock size="18px" />
+              <Text>{adventure.duration}</Text>
+            </HStack>
+            <HStack gap={1} fontWeight="semibold" color="amber.700">
+              <FaUsers size="18px" />
+              <Text>{adventure.vibe}</Text>
+            </HStack>
+          </HStack>
+
+          {/* Description */}
+          <Text flex={1} fontStyle="italic" lineHeight="tall" color="slate.600">
+            {adventure.description}
+          </Text>
+
+          {/* Expandable section */}
+          <Box
+            overflow="hidden"
+            transition="max-height 0.3s"
+            maxH={isExpanded ? '384px' : '0'}
           >
-            Close
-          </button>
-        </div>
-      )}
+            <Box mt={4} borderTopWidth="1px" borderColor="teal.100" pt={4}>
+              {/* Highlights */}
+              <VStack align="stretch" mb={4}>
+                <Heading as="h4" size="md" color="slate.900">
+                  <FormattedMessage id="story.highlights" />
+                </Heading>
+                <VStack align="stretch" spacing={2}>
+                  {adventure.highlights.map((highlight, idx) => (
+                    <HStack key={idx} gap={2} fontSize="sm" color="slate.600">
+                      <Text fontWeight="bold" color="teal.600">✓</Text>
+                      <Text>{highlight}</Text>
+                    </HStack>
+                  ))}
+                </VStack>
+              </VStack>
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        {/* Title */}
-        <h3 className="mb-3 text-2xl font-bold leading-tight text-slate-900">{adventure.title}</h3>
+              {/* Best for */}
+              <VStack align="stretch" mb={4}>
+                <Heading as="h4" size="md" color="slate.900">
+                  <FormattedMessage id="story.bestFor" />
+                </Heading>
+                <Text fontSize="sm" color="slate.600">{adventure.bestFor}</Text>
+              </VStack>
 
-        {/* Quick info */}
-        <div className="mb-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-          <div className="flex items-center gap-1 font-semibold text-teal-700">
-            <FaClock className="text-lg" />
-            <span>{adventure.duration}</span>
-          </div>
-          <div className="flex items-center gap-1 font-semibold text-amber-700">
-            <FaUsers className="text-lg" />
-            <span>{adventure.vibe}</span>
-          </div>
-        </div>
-
-        {/* Description */}
-        <p className="mb-4 flex-1 italic leading-7 text-slate-600">{adventure.description}</p>
-
-        {/* Expandable section */}
-        <div
-          className={`overflow-hidden transition-all duration-300 ${
-            isExpanded ? 'max-h-96' : 'max-h-0'
-          }`}
-        >
-          <div className="mt-4 border-t border-teal-100 pt-4">
-            {/* Highlights */}
-            <div className="mb-4">
-              <h4 className="font-bold text-slate-900 mb-2">
-                <FormattedMessage id="story.highlights" />
-              </h4>
-              <ul className="space-y-2">
-                {adventure.highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex gap-2 text-sm text-slate-600">
-                    <span className="font-bold text-teal-600">✓</span>
-                    <span>{highlight}</span>
-                  </li>
+              {/* Mood */}
+              <HStack wrap="wrap" gap={2}>
+                {adventure.mood.split(', ').map((mood, idx) => (
+                  <Badge
+                    key={idx}
+                    borderRadius="full"
+                    bgGradient="linear(to-r, teal.50, amber.50)"
+                    px={3}
+                    py={1}
+                    fontSize="xs"
+                    fontWeight="semibold"
+                    color="slate.700"
+                  >
+                    {mood}
+                  </Badge>
                 ))}
-              </ul>
-            </div>
+              </HStack>
+            </Box>
+          </Box>
 
-            {/* Best for */}
-            <div className="mb-4">
-              <h4 className="font-bold text-slate-900 mb-2">
-                <FormattedMessage id="story.bestFor" />
-              </h4>
-              <p className="text-sm text-slate-600">{adventure.bestFor}</p>
-            </div>
-
-            {/* Mood */}
-            <div className="flex flex-wrap gap-2">
-              {adventure.mood.split(', ').map((mood, idx) => (
-                <span
-                  key={idx}
-                  className="rounded-full bg-gradient-to-r from-teal-50 to-amber-50 px-3 py-1 text-xs font-semibold text-slate-700"
-                >
-                  {mood}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Action buttons */}
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex-1 rounded-full bg-gradient-to-r from-teal-700 to-cyan-600 px-4 py-2 font-semibold text-white transition-all hover:shadow-lg"
-          >
-            {isExpanded ? 'Show Less' : 'Show Details'}
-          </button>
-          <button
-            onClick={handleWhatsAppClick}
-            className="flex flex-1 items-center justify-center gap-2 rounded-full bg-emerald-600 px-4 py-2 font-semibold text-white transition-all hover:bg-emerald-700 hover:shadow-lg"
-          >
-            <FaMapPin className="text-lg" />
-            Book Now
-          </button>
-          <button
-            onClick={handleShowDetails}
-            className="flex flex-1 rounded-full border border-slate-200 bg-white px-4 py-2 font-semibold text-slate-900 transition-all hover:border-teal-600 hover:text-teal-700 hover:shadow-lg"
-          >
-            Show All Details
-          </button>
-        </div>
-      </div>
-    </div>
+          {/* Action buttons */}
+          <HStack mt={6} direction={{ base: 'column', sm: 'row' }} gap={3}>
+            <Button
+              flex={1}
+              borderRadius="full"
+              bgGradient="linear(to-r, teal.700, cyan.600)"
+              color="white"
+              fontWeight="semibold"
+              _hover={{ boxShadow: 'lg' }}
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Show Less' : 'Show Details'}
+            </Button>
+            <Button
+              flex={1}
+              borderRadius="full"
+              bg="emerald.600"
+              color="white"
+              fontWeight="semibold"
+              leftIcon={<FaMapPin />}
+              _hover={{ bg: 'emerald.700', boxShadow: 'lg' }}
+              onClick={handleWhatsAppClick}
+            >
+              Book Now
+            </Button>
+            <Button
+              flex={1}
+              borderRadius="full"
+              variant="outline"
+              borderColor="slate.200"
+              bg="white"
+              color="slate.900"
+              fontWeight="semibold"
+              _hover={{ borderColor: 'teal.600', color: 'teal.700', boxShadow: 'lg' }}
+              onClick={handleShowDetails}
+            >
+              Show All Details
+            </Button>
+          </HStack>
+        </VStack>
+      </Box>
+    </motion.div>
   );
 };
 
