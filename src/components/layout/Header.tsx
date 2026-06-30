@@ -11,7 +11,6 @@ import {
   Button,
   IconButton,
   useDisclosure,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { useBrand } from '../../contexts/BrandContext';
@@ -28,10 +27,10 @@ const Header: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { brandSettings } = useBrand();
   
-  const bgColor = useColorModeValue('whiteAlpha.700', 'gray.800');
-  const borderColor = useColorModeValue('whiteAlpha.500', 'gray.700');
-  const hoverBg = useColorModeValue('brand.100', 'brand.900');
-  const textColor = useColorModeValue('gray.800', 'white');
+  const bgColor = 'whiteAlpha.700';
+  const borderColor = 'whiteAlpha.500';
+  const hoverBg = 'brand.100';
+  const textColor = 'gray.800';
 
   return (
     <Box as="header" position="sticky" top={0} zIndex={50} w="full">
