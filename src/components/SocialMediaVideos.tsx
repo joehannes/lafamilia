@@ -158,10 +158,9 @@ const SocialMediaVideos: React.FC<SocialMediaVideosProps> = ({ showIf = true }) 
                       borderRadius="2xl"
                       overflow="hidden"
                       boxShadow="lg"
-                      _hover={{ boxShadow: '2xl' }}
+                      _hover={{ boxShadow: '2xl', borderColor: 'transparent' }}
                       border="1px solid"
                       borderColor="slate.200/70"
-                      _hover={{ borderColor: 'transparent' }}
                       display="flex"
                       flexDirection="column"
                       h="full"

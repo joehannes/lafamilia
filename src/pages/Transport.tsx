@@ -1,5 +1,26 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { motion } from 'framer-motion';
+import {
+  Box,
+  Flex,
+  VStack,
+  HStack,
+  Text,
+  Heading,
+  Button,
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  useBreakpointValue,
+  Badge,
+  Alert,
+  Divider,
+  Spinner,
+  SimpleGrid,
+} from '@chakra-ui/react';
+import { AlertIcon } from '@chakra-ui/alert';
 import { getTransferConfig } from '../services/transferConfigService';
 import { calculateDistancePrice } from '../services/transferPricingEngine';
 import { getRouteBetweenPoints } from '../services/routingService';
@@ -247,46 +268,55 @@ const Transport: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div className="grid min-h-screen place-items-center">Loading...</div>;
+    return (
+      <Flex minH="100vh" justify="center" align="center">
+        <Spinner size="xl" color="brand.orange" />
+      </Flex>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-50 via-white to-amber-50 pb-16 pt-6 md:py-16">
-      <div className="section-shell max-w-5xl px-3 md:px-4">
-        <div className="mb-6 text-center md:mb-10">
-          <h1 className="mb-3 text-3xl font-bold text-slate-900 md:text-5xl">
+    <Box minH="100vh" bgGradient="linear(to-b, cyan.50, white, amber.50)" pb={16} pt={6} mdPy={16}>
+      <Box maxW="5xl" mx="auto" px={{ base: 3, md: 4 }}>
+        <Box mb={{ base: 6, md: 10 }} textAlign="center">
+          <Heading as="h1" mb={3} fontSize={{ base: '3xl', md: '5xl' }} fontWeight="bold" color="slate.900">
             <FormattedMessage id="transport.title" defaultMessage="Airport Transfers" />
-          </h1>
-          <p className="mx-auto max-w-2xl text-base text-slate-600 md:text-lg">
+          </Heading>
+          <Text maxW="2xl" mx="auto" fontSize={{ base: 'base', md: 'lg' }} color="slate.600">
             <FormattedMessage
               id="transport.subtitle"
               defaultMessage="Private transfers from Punta Cana Airport (PUJ) to any destination. Reliable, comfortable, and affordable."
             />
-          </p>
-        </div>
+          </Text>
+        </Box>
 
         {!mapsAvailable && (
-          <div className="mb-4 rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-700">
-            ⚠️ Map services unavailable. Enter your pickup/drop-off manually below.
-          </div>
+          <Alert status="warning" mb={4} borderRadius="2xl" px={4} py={3}>
+            <AlertIcon />
+            <Text fontSize="sm" color="amber.700">
+              ⚠️ Map services unavailable. Enter your pickup/drop-off manually below.
+            </Text>
+          </Alert>
         )}
 
         {!config ? (
-          <div className="rounded-3xl bg-red-50 p-8 text-center text-red-700">
-            <FormattedMessage id="transport.configError" defaultMessage="Unable to load transfer configuration. Please try again later." />
-          </div>
+          <Alert status="error" borderRadius="3xl" p={8} textAlign="center">
+            <Text color="red.700">
+              <FormattedMessage id="transport.configError" defaultMessage="Unable to load transfer configuration. Please try again later." />
+            </Text>
+          </Alert>
         ) : (
-          <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
-            <div className="flex-1 space-y-5 md:space-y-6">
-              <div className="rounded-2xl bg-white p-4 shadow-lg md:p-6">
-                <h2 className="mb-4 text-lg font-semibold text-slate-800">
+          <Flex direction={{ base: 'column', lg: 'row' }} gap={{ base: 6, lg: 8 }}>
+            <VStack flex="1" spacing={{ base: 5, md: 6 }} align="stretch">
+              <Box borderRadius="2xl" bg="white" p={{ base: 4, md: 6 }} shadow="lg">
+                <Heading size="md" mb={4} color="slate.800">
                   📍 <FormattedMessage id="transport.pickupDropoff" defaultMessage="Pickup & Drop-off" />
-                </h2>
-                <div className="space-y-4">
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-slate-500">
+                </Heading>
+                <VStack spacing={4}>
+                  <Box w="full">
+                    <Text mb={1.5} fontSize="xs" fontWeight="medium" color="slate.500">
                       <FormattedMessage id="transport.origin" defaultMessage="Pickup location" />
-                    </label>
+                    </Text>
                     <PlaceAutocomplete
                       placeholder={locale === 'es' ? 'Ej: Hotel, aeropuerto, dirección...' : 'e.g. Hotel, airport, address...'}
                       value={originAddress}
@@ -298,29 +328,29 @@ const Transport: React.FC = () => {
                       }}
                     />
                     {form.originMunicipio && (
-                      <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
-                        <span>📍</span>
-                        <span>{locale === 'es' ? 'Municipio origen' : 'Origin municipio'}: {form.originMunicipio}</span>
-                      </div>
+                      <Badge mt={2} colorScheme="teal" borderRadius="full" px={3} py={1} fontSize="xs" fontWeight="semibold">
+                        📍 {locale === 'es' ? 'Municipio origen' : 'Origin municipio'}: {form.originMunicipio}
+                      </Badge>
                     )}
-                  </div>
+                  </Box>
 
                   {priceResult && (
-                    <div className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700 flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span>📏</span>
-                        <span className="font-medium">{priceResult.distanceKm.toFixed(1)} km • {(priceResult.distanceKm * 0.621371).toFixed(1)} mi</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span>🕒</span>
-                        <span className="font-medium">{formatDuration(priceResult.durationMinutes)}</span>
-                      </div>
-                    </div>
+                    <Flex mt={3} borderRadius="lg" bg="slate.50" px={3} py={2} fontSize="sm" color="slate.700" justify="space-between" align="center">
+                      <HStack gap={3}>
+                        <Text>📏</Text>
+                        <Text fontWeight="medium">{priceResult.distanceKm.toFixed(1)} km • {(priceResult.distanceKm * 0.621371).toFixed(1)} mi</Text>
+                      </HStack>
+                      <HStack gap={3}>
+                        <Text>🕒</Text>
+                        <Text fontWeight="medium">{formatDuration(priceResult.durationMinutes)}</Text>
+                      </HStack>
+                    </Flex>
                   )}
 
-                  <div className="flex justify-center">
-                    <button
-                      type="button"
+                  <Flex justify="center">
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                       onClick={() => {
                         const tmpAddr = originAddress;
                         const tmpLatLng = originLatLng;
@@ -334,17 +364,25 @@ const Transport: React.FC = () => {
                         setDestLatLng(tmpLatLng);
                         setForm((prev) => ({ ...prev, destinationMunicipio: tmpMunicipio }));
                       }}
-                      className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-teal-100 hover:text-teal-600 active:scale-90"
+                      style={{
+                        height: '36px',
+                        width: '36px',
+                        display: 'grid',
+                        placeItems: 'center',
+                        borderRadius: '9999px',
+                        backgroundColor: '#f1f5f9',
+                        color: '#64748b',
+                      }}
                       aria-label="Swap origin and destination"
                     >
                       ⇅
-                    </button>
-                  </div>
+                    </motion.button>
+                  </Flex>
 
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-slate-500">
+                  <Box w="full">
+                    <Text mb={1.5} fontSize="xs" fontWeight="medium" color="slate.500">
                       <FormattedMessage id="transport.destination" defaultMessage="Drop-off location" />
-                    </label>
+                    </Text>
                     <PlaceAutocomplete
                       placeholder={locale === 'es' ? 'Ej: Hotel, dirección, lugar turístico...' : 'e.g. Hotel, address, landmark...'}
                       value={destAddress}
@@ -356,47 +394,55 @@ const Transport: React.FC = () => {
                       }}
                     />
                     {form.destinationMunicipio && (
-                      <div className="mt-2 inline-block rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+                      <Badge mt={2} colorScheme="amber" borderRadius="full" px={3} py={1} fontSize="xs" fontWeight="semibold">
                         📍 {form.destinationMunicipio}
-                      </div>
+                      </Badge>
                     )}
-                  </div>
-                </div>
-              </div>
+                  </Box>
+                </VStack>
+              </Box>
 
-              <div className="rounded-2xl bg-white p-4 shadow-lg md:p-6">
-                <label className="mb-3 block text-sm font-semibold text-slate-700">
+              <Box borderRadius="2xl" bg="white" p={{ base: 4, md: 6 }} shadow="lg">
+                <Text mb={3} fontSize="sm" fontWeight="semibold" color="slate.700">
                   <FormattedMessage id="transport.tripType" defaultMessage="Trip Type" />
-                </label>
-                <div className="flex gap-3">
-                  <button
+                </Text>
+                <HStack gap={3}>
+                  <Button
+                    flex="1"
+                    borderRadius="xl"
+                    px={4}
+                    py={4}
+                    fontSize="base"
+                    fontWeight="semibold"
+                    bg={tripType === 'round-trip' ? 'teal.600' : 'slate.100'}
+                    color={tripType === 'round-trip' ? 'white' : 'slate.600'}
+                    _hover={{ bg: tripType === 'round-trip' ? 'teal.700' : 'slate.200' }}
                     onClick={() => setTripType('round-trip')}
-                    className={`flex-1 rounded-xl px-4 py-4 text-center font-semibold text-base transition ${
-                      tripType === 'round-trip'
-                        ? 'bg-teal-600 text-white shadow-md'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
                   >
                     🔄 <FormattedMessage id="transport.roundTrip" defaultMessage="Round Trip" />
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    flex="1"
+                    borderRadius="xl"
+                    px={4}
+                    py={4}
+                    fontSize="base"
+                    fontWeight="semibold"
+                    bg={tripType === 'one-way' ? 'teal.600' : 'slate.100'}
+                    color={tripType === 'one-way' ? 'white' : 'slate.600'}
+                    _hover={{ bg: tripType === 'one-way' ? 'teal.700' : 'slate.200' }}
                     onClick={() => setTripType('one-way')}
-                    className={`flex-1 rounded-xl px-4 py-4 text-center font-semibold text-base transition ${
-                      tripType === 'one-way'
-                        ? 'bg-teal-600 text-white shadow-md'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
                   >
                     ➡️ <FormattedMessage id="transport.oneWay" defaultMessage="One Way" />
-                  </button>
-                </div>
-              </div>
+                  </Button>
+                </HStack>
+              </Box>
 
-              <div className="rounded-2xl bg-white p-4 shadow-lg md:p-6">
-                <h3 className="mb-4 text-lg font-semibold text-slate-800">
+              <Box borderRadius="2xl" bg="white" p={{ base: 4, md: 6 }} shadow="lg">
+                <Heading size="md" mb={4} color="slate.800">
                   📅 <FormattedMessage id="transport.dateTime" defaultMessage="Date & Time" />
-                </h3>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                </Heading>
+                <SimpleGrid columns={{ base: 1, sm: 2 }} gap={4}>
                   <DateTimePicker
                     type="date"
                     value={departureDate}
@@ -425,30 +471,36 @@ const Transport: React.FC = () => {
                       />
                     </>
                   )}
-                </div>
-              </div>
+                </SimpleGrid>
+              </Box>
 
-              <div className="rounded-2xl bg-white p-4 shadow-lg md:p-6">
-                <h3 className="mb-4 text-lg font-semibold text-slate-800">
+              <Box borderRadius="2xl" bg="white" p={{ base: 4, md: 6 }} shadow="lg">
+                <Heading size="md" mb={4} color="slate.800">
                   🚗 <FormattedMessage id="transport.vehicleAndPassengers" defaultMessage="Vehicle & Passengers" />
-                </h3>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-slate-500">
+                </Heading>
+                <SimpleGrid columns={{ base: 1, sm: 2 }} gap={4}>
+                  <Box>
+                    <Text mb={1.5} fontSize="xs" fontWeight="medium" color="slate.500">
                       <FormattedMessage id="transport.vehicleType" defaultMessage="Vehicle Type" />
-                    </label>
-                    <select
+                    </Text>
+                    <Select
                       value={form.vehicleKey}
                       onChange={(e) => setForm((prev) => ({ ...prev, vehicleKey: e.target.value }))}
-                      className="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-4 text-base focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"
+                      borderRadius="2xl"
+                      borderColor="slate.200"
+                      bg="white"
+                      px={4}
+                      py={4}
+                      fontSize="base"
+                      _focus={{ borderColor: 'teal.500', ring: 2, ringColor: 'teal.200' }}
                     >
                       {config.vehicleTypes.map((vt) => (
                         <option key={vt.key} value={vt.key}>
                           {vt.label} (≤{vt.maxPassengers} pax)
                         </option>
                       ))}
-                    </select>
-                  </div>
+                    </Select>
+                  </Box>
                   <MobileNumberPicker
                     value={form.passengers}
                     onChange={handlePassengerChange}
@@ -458,51 +510,68 @@ const Transport: React.FC = () => {
                     label={locale === 'es' ? 'Pasajeros' : 'Passengers'}
                     ariaLabel="passengers"
                   />
-                </div>
+                </SimpleGrid>
                 {selectedVehicle && (
-                  <div className="mt-3 space-y-2 text-sm text-slate-600">
-                    <p>
+                  <VStack mt={3} spacing={2} align="stretch">
+                    <Text fontSize="sm" color="slate.600">
                       <FormattedMessage
                         id="transport.vehicleCapacity"
                         defaultMessage="Capacity: {min}–{max} passengers"
                         values={{ min: selectedVehicle.typicalPassengers[0], max: selectedVehicle.typicalPassengers[1] }}
                       />
-                    </p>
-                    <p className="text-xs text-slate-400">{selectedVehicle.description}</p>
+                    </Text>
+                    <Text fontSize="xs" color="slate.400">{selectedVehicle.description}</Text>
                     {selectedVehicle.image && (
-                      <div className="mt-2 h-28 w-full overflow-hidden rounded-xl bg-slate-100 md:h-36">
-                        <img src={selectedVehicle.image} alt={selectedVehicle.label} className="h-full w-full object-cover" />
-                      </div>
+                      <Box mt={2} h={{ base: 28, md: 36 }} w="full" overflow="hidden" borderRadius="xl" bg="slate.100">
+                        <Box as="img" src={selectedVehicle.image} alt={selectedVehicle.label} h="full" w="full" objectFit="cover" />
+                      </Box>
                     )}
                     {needsTwoVehicles && (
-                      <p className="flex items-center gap-1 rounded-lg bg-amber-50 px-3 py-2 text-amber-700">
-                        <span>⚠️</span>
+                      <Flex align="center" gap={1} borderRadius="lg" bg="amber.50" px={3} py={2} color="amber.700">
+                        <Text>⚠️</Text>
                         <FormattedMessage
                           id="transport.twoVehiclesNeeded"
                           defaultMessage="Double price applied: passenger count exceeds typical capacity"
                         />
-                      </p>
+                      </Flex>
                     )}
-                  </div>
+                  </VStack>
                 )}
-              </div>
+              </Box>
 
-              <div className="rounded-2xl bg-white p-4 shadow-lg md:p-6">
-                <h3 className="mb-4 text-lg font-semibold text-slate-800">
+              <Box borderRadius="2xl" bg="white" p={{ base: 4, md: 6 }} shadow="lg">
+                <Heading size="md" mb={4} color="slate.800">
                   ⚙️ <FormattedMessage id="transport.extras" defaultMessage="Extras" />
-                </h3>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <label className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition has-[:checked]:border-teal-300 has-[:checked]:bg-teal-50 active:scale-[0.98]">
+                </Heading>
+                <SimpleGrid columns={{ base: 1, sm: 2 }} gap={4}>
+                  <motion.label
+                    whileTap={{ scale: 0.98 }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      borderRadius: '12px',
+                      border: '1px solid #e2e8f0',
+                      padding: '16px',
+                      transition: 'all 0.2s',
+                    }}
+                  >
                     <input
                       type="checkbox"
                       checked={form.nightTransfer}
                       onChange={(e) => setForm((prev) => ({ ...prev, nightTransfer: e.target.checked }))}
-                      className="h-5 w-5 rounded border-slate-300 text-teal-600 focus:ring-teal-500"
+                      style={{
+                        height: '20px',
+                        width: '20px',
+                        borderRadius: '4px',
+                        borderColor: '#cbd5e1',
+                        color: '#0d9488',
+                      }}
                     />
-                    <span className="text-sm text-slate-700">
+                    <Text fontSize="sm" color="slate.700">
                       🌙 <FormattedMessage id="transport.nightTransfer" defaultMessage="Night Transfer" />
-                    </span>
-                  </label>
+                    </Text>
+                  </motion.label>
                   <MobileNumberPicker
                     value={form.waitingHours}
                     onChange={(v) => setForm((prev) => ({ ...prev, waitingHours: v ?? 0 }))}
@@ -521,200 +590,247 @@ const Transport: React.FC = () => {
                     label={locale === 'es' ? 'Sillas Infantiles' : 'Child Seats'}
                     ariaLabel="child seats"
                   />
-                </div>
+                </SimpleGrid>
                 {form.nightTransfer && (
-                  <p className="mt-2 text-xs text-amber-600">🌙 +15% night surcharge after 10 PM</p>
+                  <Text mt={2} fontSize="xs" color="amber.600">🌙 +15% night surcharge after 10 PM</Text>
                 )}
-              </div>
-
-              <div className="rounded-2xl bg-white p-4 shadow-lg md:p-6">
-                <h3 className="mb-4 text-lg font-semibold text-slate-800">
+              </Box>
+              <Box borderRadius="2xl" bg="white" p={{ base: 4, md: 6 }} shadow="lg">
+                <Heading size="md" mb={4} color="slate.800">
                   📋 <FormattedMessage id="transport.locationInfo" defaultMessage="Location Details" />
-                </h3>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-slate-500">
+                </Heading>
+                <SimpleGrid columns={{ base: 1, sm: 2 }} gap={4}>
+                  <Box>
+                    <Text mb={1.5} fontSize="xs" fontWeight="medium" color="slate.500">
                       <FormattedMessage id="transport.flightNumber" defaultMessage="Flight Number" />
-                    </label>
-                    <input
+                    </Text>
+                    <Input
                       type="text"
                       inputMode="text"
                       value={flightNumber}
                       onChange={(e) => setFlightNumber(e.target.value)}
                       placeholder={locale === 'es' ? 'Ej: AA 1234' : 'e.g. AA 1234'}
-                      className="w-full rounded-2xl border border-slate-200 px-4 py-4 text-base focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"
+                      borderRadius="2xl"
+                      borderColor="slate.200"
+                      px={4}
+                      py={4}
+                      fontSize="base"
+                      _focus={{ borderColor: 'teal.500', outline: 'none', ring: 2, ringColor: 'teal.200' }}
                     />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-slate-500">
+                  </Box>
+                  <Box>
+                    <Text mb={1.5} fontSize="xs" fontWeight="medium" color="slate.500">
                       <FormattedMessage id="transport.hotelName" defaultMessage="Hotel / Resort" />
-                    </label>
-                    <input
+                    </Text>
+                    <Input
                       type="text"
                       inputMode="text"
                       value={hotelName}
                       onChange={(e) => setHotelName(e.target.value)}
                       placeholder={locale === 'es' ? 'Ej: Iberostar' : 'e.g. Iberostar'}
-                      className="w-full rounded-2xl border border-slate-200 px-4 py-4 text-base focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"
+                      borderRadius="2xl"
+                      borderColor="slate.200"
+                      px={4}
+                      py={4}
+                      fontSize="base"
+                      _focus={{ borderColor: 'teal.500', outline: 'none', ring: 2, ringColor: 'teal.200' }}
                     />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="mb-1.5 block text-xs font-medium text-slate-500">
+                  </Box>
+                  <Box gridColumn={{ sm: 'span 2' }}>
+                    <Text mb={1.5} fontSize="xs" fontWeight="medium" color="slate.500">
                       <FormattedMessage id="transport.notes" defaultMessage="Notes" />
-                    </label>
-                    <textarea
+                    </Text>
+                    <Textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       placeholder={locale === 'es' ? 'Requisitos especiales...' : 'Special requirements...'}
                       rows={3}
-                      className="w-full rounded-2xl border border-slate-200 px-4 py-4 text-base focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"
+                      borderRadius="2xl"
+                      borderColor="slate.200"
+                      px={4}
+                      py={4}
+                      fontSize="base"
+                      _focus={{ borderColor: 'teal.500', outline: 'none', ring: 2, ringColor: 'teal.200' }}
                     />
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </Box>
+                </SimpleGrid>
+              </Box>
+            </VStack>
 
-            <div className="w-full lg:w-80 xl:w-96">
-              <div className="sticky top-24 space-y-5 md:space-y-6">
-                <div className="rounded-2xl bg-white p-5 shadow-lg md:p-6">
-                  <h2 className="mb-4 text-lg font-semibold text-slate-800">
+            <Box w="full" lgW="80" xlW="96">
+              <VStack position="sticky" top={24} spacing={{ base: 5, md: 6 }}>
+                <Box borderRadius="2xl" bg="white" p={{ base: 5, md: 6 }} shadow="lg">
+                  <Heading size="md" mb={4} color="slate.800">
                     💰 <FormattedMessage id="transport.priceSummary" defaultMessage="Price Summary" />
-                  </h2>
+                  </Heading>
 
                   {priceError && (
-                    <div className="mb-4 rounded-xl bg-red-50 p-4 text-sm text-red-700">{priceError}</div>
+                    <Alert status="error" mb={4} borderRadius="xl" px={4} py={4}>
+                      <Text fontSize="sm" color="red.700">{priceError}</Text>
+                    </Alert>
                   )}
 
                   {priceResult && !priceError && (
-                    <div className="space-y-4">
-                      <div className="text-center">
-                        <p className="text-3xl font-bold text-teal-700">{formatPrice(priceResult.estimatedPrice)}</p>
-                        <p className="text-xs text-slate-500">
+                    <VStack spacing={4}>
+                      <Box textAlign="center">
+                        <Text fontSize="3xl" fontWeight="bold" color="teal.700">{formatPrice(priceResult.estimatedPrice)}</Text>
+                        <Text fontSize="xs" color="slate.500">
                           <FormattedMessage id="transport.estimatedPrice" defaultMessage="Estimated total price" />
-                        </p>
-                        <p className="mt-1 text-sm text-slate-600">
+                        </Text>
+                        <Text mt={1} fontSize="sm" color="slate.600">
                           {tripType === 'round-trip' ? (
                             <FormattedMessage id="transport.roundTripIncluded" defaultMessage="Round trip (both ways)" />
                           ) : (
                             <FormattedMessage id="transport.oneWayTrip" defaultMessage="One way transfer" />
                           )}
-                        </p>
-                      </div>
+                        </Text>
+                      </Box>
 
-                      <div className="space-y-2 border-t border-slate-100 pt-4 text-sm text-slate-600">
-                        <div className="flex justify-between">
-                          <span><FormattedMessage id="transport.origin" defaultMessage="From" /></span>
-                          <span className="font-medium">{priceResult.originLabel}</span>
-                        </div>
+                      <VStack spacing={2} borderTopWidth={1} borderColor="slate.100" pt={4} fontSize="sm" color="slate.600" align="stretch">
+                        <Flex justify="space-between">
+                          <Text><FormattedMessage id="transport.origin" defaultMessage="From" /></Text>
+                          <Text fontWeight="medium">{priceResult.originLabel}</Text>
+                        </Flex>
                         {priceResult.originMunicipio && (
-                          <div className="flex justify-between items-center text-teal-700">
-                            <span>📍 <FormattedMessage id="transport.originMunicipio" defaultMessage="Origin municipio" /></span>
-                            <span className="font-semibold">{priceResult.originMunicipio}</span>
-                          </div>
+                          <Flex justify="space-between" align="center" color="teal.700">
+                            <Text>📍 <FormattedMessage id="transport.originMunicipio" defaultMessage="Origin municipio" /></Text>
+                            <Text fontWeight="semibold">{priceResult.originMunicipio}</Text>
+                          </Flex>
                         )}
-                        <div className="flex justify-between">
-                          <span><FormattedMessage id="transport.destination" defaultMessage="To" /></span>
-                          <span className="font-medium">{priceResult.destinationLabel}</span>
-                        </div>
+                        <Flex justify="space-between">
+                          <Text><FormattedMessage id="transport.destination" defaultMessage="To" /></Text>
+                          <Text fontWeight="medium">{priceResult.destinationLabel}</Text>
+                        </Flex>
                         {priceResult.destinationMunicipio && (
-                          <div className="flex justify-between items-center text-amber-700">
-                            <span>📍 <FormattedMessage id="transport.destMunicipio" defaultMessage="Destination municipio" /></span>
-                            <span className="font-semibold">{priceResult.destinationMunicipio}</span>
-                          </div>
+                          <Flex justify="space-between" align="center" color="amber.700">
+                            <Text>📍 <FormattedMessage id="transport.destMunicipio" defaultMessage="Destination municipio" /></Text>
+                            <Text fontWeight="semibold">{priceResult.destinationMunicipio}</Text>
+                          </Flex>
                         )}
                         {priceResult.breakdown.municipioMultiplierApplied && priceResult.breakdown.municipioMultiplierApplied !== 1.0 && (
-                          <div className="flex justify-between items-center rounded-lg bg-teal-50 px-2 py-2 text-teal-700 font-semibold border border-teal-100">
-                            <span>🏘️ <FormattedMessage id="transport.municipioMultiplier" defaultMessage="Municipio multiplier" /></span>
-                            <span className="text-lg">{priceResult.breakdown.municipioMultiplierApplied.toFixed(2)}×</span>
-                          </div>
+                          <Flex justify="space-between" align="center" borderRadius="lg" bg="teal.50" px={2} py={2} color="teal.700" fontWeight="semibold" border="1px solid" borderColor="teal.100">
+                            <Text>🏘️ <FormattedMessage id="transport.municipioMultiplier" defaultMessage="Municipio multiplier" /></Text>
+                            <Text fontSize="lg">{priceResult.breakdown.municipioMultiplierApplied.toFixed(2)}×</Text>
+                          </Flex>
                         )}
-                        <div className="flex justify-between">
-                          <span><FormattedMessage id="transport.vehicle" defaultMessage="Vehicle" /></span>
-                          <span className="font-medium">{priceResult.vehicleLabel}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span><FormattedMessage id="transport.passengers" defaultMessage="Passengers" /></span>
-                          <span className="font-medium">{priceResult.passengers}</span>
-                        </div>
+                        <Flex justify="space-between">
+                          <Text><FormattedMessage id="transport.vehicle" defaultMessage="Vehicle" /></Text>
+                          <Text fontWeight="medium">{priceResult.vehicleLabel}</Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text><FormattedMessage id="transport.passengers" defaultMessage="Passengers" /></Text>
+                          <Text fontWeight="medium">{priceResult.passengers}</Text>
+                        </Flex>
                         {priceResult.distanceKm !== undefined && (
-                          <div className="flex justify-between">
-                            <span>📏 <FormattedMessage id="transport.distance" defaultMessage="Distance" /></span>
-                            <span className="font-medium">{priceResult.distanceKm.toFixed(1)} km • {(priceResult.distanceKm * 0.621371).toFixed(1)} mi</span>
-                          </div>
+                          <Flex justify="space-between">
+                            <Text>📏 <FormattedMessage id="transport.distance" defaultMessage="Distance" /></Text>
+                            <Text fontWeight="medium">{priceResult.distanceKm.toFixed(1)} km • {(priceResult.distanceKm * 0.621371).toFixed(1)} mi</Text>
+                          </Flex>
                         )}
                         {priceResult.durationMinutes !== undefined && (
-                          <div className="flex justify-between">
-                            <span>🕒 <FormattedMessage id="transport.duration" defaultMessage="Estimated travel time" /></span>
-                            <span className="font-medium">{formatDuration(priceResult.durationMinutes)}</span>
-                          </div>
+                          <Flex justify="space-between">
+                            <Text>🕒 <FormattedMessage id="transport.duration" defaultMessage="Estimated travel time" /></Text>
+                            <Text fontWeight="medium">{formatDuration(priceResult.durationMinutes)}</Text>
+                          </Flex>
                         )}
                         {routeGeometry && (
-                          <div className="mt-3">
-                            <RouteMap origin={originLatLng ?? undefined} destination={destLatLng ?? undefined} geometry={routeGeometry} className="h-72 rounded-xl border border-slate-100" />
-                          </div>
+                          <Box mt={3}>
+                            <RouteMap origin={originLatLng ?? undefined} destination={destLatLng ?? undefined} geometry={routeGeometry} h="72" borderRadius="xl" border="1px solid" borderColor="slate.100" />
+                          </Box>
                         )}
                         {form.nightTransfer && (
-                          <div className="flex justify-between text-amber-700">
-                            <span>🌙 <FormattedMessage id="transport.nightFee" defaultMessage="Night fee" /></span>
-                            <span className="font-medium">+15%</span>
-                          </div>
+                          <Flex justify="space-between" color="amber.700">
+                            <Text>🌙 <FormattedMessage id="transport.nightFee" defaultMessage="Night fee" /></Text>
+                            <Text fontWeight="medium">+15%</Text>
+                          </Flex>
                         )}
                         {priceResult.breakdown.distanceDiscountPercent !== undefined && priceResult.breakdown.distanceDiscountPercent > 0 && (
-                          <div className="flex justify-between text-teal-700">
-                            <span>🏷️ <FormattedMessage id="transport.distanceDiscount" defaultMessage="Distance discount" /></span>
-                            <span className="font-medium">{priceResult.breakdown.distanceDiscountPercent}%</span>
-                          </div>
+                          <Flex justify="space-between" color="teal.700">
+                            <Text>🏷️ <FormattedMessage id="transport.distanceDiscount" defaultMessage="Distance discount" /></Text>
+                            <Text fontWeight="medium">{priceResult.breakdown.distanceDiscountPercent}%</Text>
+                          </Flex>
                         )}
                         {needsTwoVehicles && (
-                          <div className="flex justify-between text-amber-700">
-                            <span>🚗🚗 <FormattedMessage id="transport.doubleVehicle" defaultMessage="Double vehicle" /></span>
-                            <span className="font-medium">×2</span>
-                          </div>
+                          <Flex justify="space-between" color="amber.700">
+                            <Text>🚗🚗 <FormattedMessage id="transport.doubleVehicle" defaultMessage="Double vehicle" /></Text>
+                            <Text fontWeight="medium">×2</Text>
+                          </Flex>
                         )}
-                      </div>
-                    </div>
+                      </VStack>
+                    </VStack>
                   )}
 
                   {!priceResult && !priceError && (
-                    <div className="py-8 text-center text-sm text-slate-400">
-                      <FormattedMessage id="transport.fillFields" defaultMessage="Select pickup, drop-off, and vehicle to see the price" />
-                    </div>
+                    <Box py={8} textAlign="center">
+                      <Text fontSize="sm" color="slate.400">
+                        <FormattedMessage id="transport.fillFields" defaultMessage="Select pickup, drop-off, and vehicle to see the price" />
+                      </Text>
+                    </Box>
                   )}
-                </div>
+                </Box>
 
-                <div className="space-y-3">
-                  <button
+                <VStack spacing={3}>
+                  <Button
                     onClick={handleBookNow}
-                    disabled={!priceResult || !!priceError}
-                    className={`w-full rounded-2xl px-6 py-4 text-center text-base font-bold text-white shadow-lg transition active:scale-[0.97] ${
-                      priceResult && !priceError ? 'bg-teal-600 hover:bg-teal-700' : 'cursor-not-allowed bg-slate-300'
-                    }`}
+                    isDisabled={!priceResult || !!priceError}
+                    w="full"
+                    borderRadius="2xl"
+                    px={6}
+                    py={4}
+                    fontSize="base"
+                    fontWeight="bold"
+                    color="white"
+                    bg={priceResult && !priceError ? 'teal.600' : 'slate.300'}
+                    _hover={{ bg: priceResult && !priceError ? 'teal.700' : 'slate.300' }}
+                    _active={{ scale: 0.97 }}
+                    shadow="lg"
                   >
                     📱 <FormattedMessage id="transport.bookNow" defaultMessage="Book via WhatsApp" />
-                  </button>
+                  </Button>
 
                   {priceResult && !priceError && brandSettings.paypalMeLink && (
-                    <button
+                    <Button
                       onClick={handlePayWithPayPal}
-                      className="w-full rounded-2xl bg-[#0070ba] px-6 py-4 text-center text-base font-bold text-white shadow-lg transition hover:bg-[#003087] active:scale-[0.97]"
+                      w="full"
+                      borderRadius="2xl"
+                      bg="#0070ba"
+                      px={6}
+                      py={4}
+                      fontSize="base"
+                      fontWeight="bold"
+                      color="white"
+                      _hover={{ bg: '#003087' }}
+                      _active={{ scale: 0.97 }}
+                      shadow="lg"
                     >
                       💳 <FormattedMessage id="payment.paypal" defaultMessage="Pay with PayPal" />
-                    </button>
+                    </Button>
                   )}
 
-                  <button
+                  <Button
                     onClick={handleChatOnWhatsApp}
-                    className="w-full rounded-2xl border-2 border-teal-200 bg-white px-6 py-4 text-center text-base font-semibold text-teal-700 transition hover:bg-teal-50 active:scale-[0.97]"
+                    w="full"
+                    borderRadius="2xl"
+                    borderWidth={2}
+                    borderColor="teal.200"
+                    bg="white"
+                    px={6}
+                    py={4}
+                    fontSize="base"
+                    fontWeight="semibold"
+                    color="teal.700"
+                    _hover={{ bg: 'teal.50' }}
+                    _active={{ scale: 0.97 }}
                   >
                     💬 <FormattedMessage id="transport.chatOnWhatsApp" defaultMessage="Chat / Question" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </Button>
+                </VStack>
+              </VStack>
+            </Box>
+          </Flex>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
