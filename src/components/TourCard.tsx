@@ -12,9 +12,8 @@ import {
   Badge,
   Image,
   Input,
-  FormControl,
-  FormLabel,
 } from '@chakra-ui/react';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { generateWhatsAppMessage } from '../utils/whatsapp';
 import { useBrand } from '../contexts/BrandContext';
 import { PricingOption } from '../services/toursService';

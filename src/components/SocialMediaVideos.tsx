@@ -1,40 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { getSocialMediaData, SocialMediaVideo } from '../services/socialMediaService';
+import { motion } from 'framer-motion';
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  HStack,
+  Badge,
+  Button,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import { FaInstagram, FaTiktok, FaFacebook, FaYoutube, FaTwitter, FaPlay } from 'react-icons/fa';
+import { getSocialMediaData, SocialMediaVideo } from '../services/socialMediaService';
 
 const platformIcons: Record<string, React.ReactNode> = {
-  instagram: <FaInstagram className="w-6 h-6" />,
-  tiktok: <FaTiktok className="w-6 h-6" />,
-  facebook: <FaFacebook className="w-6 h-6" />,
-  youtube: <FaYoutube className="w-6 h-6" />,
-  twitter: <FaTwitter className="w-6 h-6" />
+  instagram: <FaInstagram />,
+  tiktok: <FaTiktok />,
+  facebook: <FaFacebook />,
+  youtube: <FaYoutube />,
+  twitter: <FaTwitter />
 };
 
-const platformColors: Record<string, { bg: string; text: string; gradient: string }> = {
+const platformColors: Record<string, { bgGradient: string; color: string }> = {
   instagram: {
-    bg: 'bg-gradient-to-br from-pink-500 to-purple-500',
-    text: 'text-pink-600',
-    gradient: 'from-pink-500 to-purple-500'
+    bgGradient: 'linear(to-br, pink.500, purple.500)',
+    color: 'pink.600'
   },
   tiktok: {
-    bg: 'bg-gradient-to-br from-black to-slate-800',
-    text: 'text-black',
-    gradient: 'from-black to-slate-800'
+    bgGradient: 'linear(to-br, black, slate.800)',
+    color: 'black'
   },
   facebook: {
-    bg: 'bg-gradient-to-br from-blue-600 to-blue-800',
-    text: 'text-blue-600',
-    gradient: 'from-blue-600 to-blue-800'
+    bgGradient: 'linear(to-br, blue.600, blue.800)',
+    color: 'blue.600'
   },
   youtube: {
-    bg: 'bg-gradient-to-br from-red-600 to-red-800',
-    text: 'text-red-600',
-    gradient: 'from-red-600 to-red-800'
+    bgGradient: 'linear(to-br, red.600, red.800)',
+    color: 'red.600'
   },
   twitter: {
-    bg: 'bg-gradient-to-br from-blue-400 to-blue-600',
-    text: 'text-blue-400',
-    gradient: 'from-blue-400 to-blue-600'
+    bgGradient: 'linear(to-br, blue.400, blue.600)',
+    color: 'blue.400'
   }
 };
 
@@ -53,7 +59,6 @@ const SocialMediaVideos: React.FC<SocialMediaVideosProps> = ({ showIf = true }) 
         const data = await getSocialMediaData();
         if (data.videos && data.videos.length > 0) {
           setVideos(data.videos);
-          // Group videos by platform
           const grouped: Record<string, SocialMediaVideo[]> = {};
           data.videos.forEach((video: SocialMediaVideo) => {
             if (!grouped[video.platform]) {
@@ -72,7 +77,6 @@ const SocialMediaVideos: React.FC<SocialMediaVideosProps> = ({ showIf = true }) 
     loadVideos();
   }, []);
 
-  // Don't show if no videos or showIf is false
   if (!showIf || loading || videos.length === 0) {
     return null;
   }
@@ -80,114 +84,215 @@ const SocialMediaVideos: React.FC<SocialMediaVideosProps> = ({ showIf = true }) 
   const platforms = Object.keys(videosByPlatform);
 
   return (
-    <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-b from-pink-300 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-t from-blue-300 to-transparent rounded-full blur-3xl" />
-      </div>
+    <Box
+      as="section"
+      py={24}
+      px={{ base: 4, md: 8 }}
+      bgGradient="linear(to-b, slate.50, white)"
+      position="relative"
+      overflow="hidden"
+    >
+      <Box position="absolute" inset={0} opacity={0.05} pointerEvents="none">
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          w={96}
+          h={96}
+          bgGradient="linear(to-b, pink.300, transparent)"
+          borderRadius="full"
+          blur="3xl"
+        />
+        <Box
+          position="absolute"
+          bottom={0}
+          right={0}
+          w={96}
+          h={96}
+          bgGradient="linear(to-t, blue.300, transparent)"
+          borderRadius="full"
+          blur="3xl"
+        />
+      </Box>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+      <Container maxW="7xl" position="relative" zIndex={10}>
+        <Box textAlign="center" mb={16}>
+          <Heading as="h2" size="2xl" mb={4} color="slate.900">
             Follow Our Adventures
-          </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          </Heading>
+          <Text fontSize="xl" color="slate.600" maxW="2xl" mx="auto">
             Watch exclusive behind-the-scenes content and adventure highlights from across our social media
-          </p>
-        </div>
+          </Text>
+        </Box>
 
-        {/* Videos by platform */}
-        <div className="space-y-16">
+        <Box spacing={16}>
           {platforms.map((platform) => (
-            <div key={platform} className="space-y-6">
-              {/* Platform header */}
-              <div className={`inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r ${platformColors[platform].gradient} text-white rounded-full shadow-lg`}>
+            <Box key={platform} mb={16}>
+              <Badge
+                display="inline-flex"
+                alignItems="center"
+                gap={3}
+                px={6}
+                py={3}
+                bgGradient={platformColors[platform].bgGradient}
+                color="white"
+                borderRadius="full"
+                boxShadow="lg"
+                fontSize="lg"
+                fontWeight="bold"
+                textTransform="capitalize"
+              >
                 {platformIcons[platform]}
-                <span className="font-bold text-lg capitalize">{platform}</span>
-              </div>
+                <span>{platform}</span>
+              </Badge>
 
-              {/* Videos grid for this platform */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {videosByPlatform[platform].map((video, idx) => (
-                  <div
+              <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} mt={6}>
+                {videosByPlatform[platform].map((video) => (
+                  <motion.div
                     key={video.id}
-                    className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border border-slate-200/70 hover:border-transparent flex flex-col h-full bg-white"
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {/* Video thumbnail/preview */}
-                    <div className={`relative h-64 bg-gradient-to-br ${platformColors[platform].gradient} flex items-center justify-center overflow-hidden`}>
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all" />
-                      <FaPlay className="text-6xl text-white/80 group-hover:text-white transition-all transform group-hover:scale-125" />
-
-                      {/* Video info overlay */}
-                      <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <p className="text-white text-sm font-semibold">{video.title}</p>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex flex-1 flex-col p-5 bg-white space-y-4">
-                      <div className="space-y-3">
-                        <h3 className="font-bold text-slate-900 line-clamp-2">{video.title}</h3>
-                        <p className="text-sm text-slate-600 line-clamp-2">{video.description}</p>
-                        <p className="text-xs text-slate-500">{video.createdAt}</p>
-                      </div>
-
-                      <a
-                        href={video.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto inline-flex w-full items-center justify-center py-3 px-4 bg-gradient-to-r from-pink-500 to-orange-500 text-white text-center font-bold rounded-xl hover:shadow-lg transition-all hover:scale-105"
+                    <Box
+                      position="relative"
+                      borderRadius="2xl"
+                      overflow="hidden"
+                      boxShadow="lg"
+                      _hover={{ boxShadow: '2xl' }}
+                      border="1px solid"
+                      borderColor="slate.200/70"
+                      _hover={{ borderColor: 'transparent' }}
+                      display="flex"
+                      flexDirection="column"
+                      h="full"
+                      bg="white"
+                    >
+                      <Box
+                        position="relative"
+                        h={64}
+                        bgGradient={platformColors[platform].bgGradient}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        overflow="hidden"
                       >
-                        Watch on {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                        <Box
+                          position="absolute"
+                          inset={0}
+                          bg="blackAlpha.400"
+                          _groupHover={{ bg: 'blackAlpha.600' }}
+                          transition="all 0.3s"
+                        />
+                        <Box
+                          as={FaPlay}
+                          fontSize="6xl"
+                          color="whiteAlpha.800"
+                          _groupHover={{ color: 'white', transform: 'scale(1.25)' }}
+                          transition="all 0.3s"
+                        />
+                        <Box
+                          position="absolute"
+                          inset={0}
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          p={4}
+                          bgGradient="linear(to-t, blackAlpha.800, blackAlpha.200, transparent)"
+                          opacity={0}
+                          _groupHover={{ opacity: 1 }}
+                          transition="opacity 0.3s"
+                        >
+                          <Text fontSize="sm" fontWeight="semibold" color="white">
+                            {video.title}
+                          </Text>
+                        </Box>
+                      </Box>
 
-        {/* View all CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-slate-600 mb-6">
+                      <Box flex={1} p={5} bg="white" spacing={4}>
+                        <Box spacing={3}>
+                          <Heading as="h3" size="md" color="slate.900" noOfLines={2}>
+                            {video.title}
+                          </Heading>
+                          <Text fontSize="sm" color="slate.600" noOfLines={2}>
+                            {video.description}
+                          </Text>
+                          <Text fontSize="xs" color="slate.500">
+                            {video.createdAt}
+                          </Text>
+                        </Box>
+
+                        <Button
+                          as="a"
+                          href={video.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          w="full"
+                          mt="auto"
+                          py={3}
+                          px={4}
+                          bgGradient="linear(to-r, pink.500, orange.500)"
+                          color="white"
+                          fontWeight="bold"
+                          borderRadius="xl"
+                          _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
+                          transition="all 0.2s"
+                        >
+                          Watch on {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                        </Button>
+                      </Box>
+                    </Box>
+                  </motion.div>
+                ))}
+              </SimpleGrid>
+            </Box>
+          ))}
+        </Box>
+
+        <Box mt={16} textAlign="center">
+          <Text color="slate.600" mb={6}>
             Like what you see? Follow us on social media for daily adventure content!
-          </p>
-          <div className="flex justify-center gap-4">
+          </Text>
+          <HStack justify="center" gap={4} flexWrap="wrap">
             {platforms.map((platform) => {
-              const url = platforms
-                .filter((p) => p === platform)
-                .map((p) => {
-                  // You can customize these URLs based on your social media accounts
-                  const baseUrls: Record<string, string> = {
-                    instagram: 'https://instagram.com',
-                    tiktok: 'https://tiktok.com',
-                    facebook: 'https://facebook.com',
-                    youtube: 'https://youtube.com',
-                    twitter: 'https://twitter.com'
-                  };
-                  return baseUrls[p] || '#';
-                })[0];
+              const baseUrls: Record<string, string> = {
+                instagram: 'https://instagram.com',
+                tiktok: 'https://tiktok.com',
+                facebook: 'https://facebook.com',
+                youtube: 'https://youtube.com',
+                twitter: 'https://twitter.com'
+              };
+              const url = baseUrls[platform] || '#';
 
               return (
-                <a
+                <Button
                   key={platform}
+                  as="a"
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${platformColors[platform].gradient} text-white font-bold rounded-lg hover:shadow-lg transition-all transform hover:scale-105`}
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={2}
+                  px={6}
+                  py={3}
+                  bgGradient={platformColors[platform].bgGradient}
+                  color="white"
+                  fontWeight="bold"
+                  borderRadius="lg"
+                  _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
+                  transition="all 0.2s"
                 >
                   {platformIcons[platform]}
-                  <span className="capitalize hidden sm:inline">{platform}</span>
-                </a>
+                  <Text display={{ base: 'none', sm: 'inline' }} capitalize>
+                    {platform}
+                  </Text>
+                </Button>
               );
             })}
-          </div>
-        </div>
-      </div>
-    </section>
+          </HStack>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
