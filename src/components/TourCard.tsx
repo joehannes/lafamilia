@@ -1,6 +1,19 @@
 import React, { useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+  Box,
+  VStack,
+  HStack,
+  Heading,
+  Text,
+  Button,
+  Badge,
+  Image,
+  Input,
+} from '@chakra-ui/react';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { generateWhatsAppMessage } from '../utils/whatsapp';
 import { useBrand } from '../contexts/BrandContext';
 import { PricingOption } from '../services/toursService';
@@ -109,101 +122,187 @@ const TourCard: React.FC<TourCardProps> = ({
   };
 
   return (
-    <article className="flex-col justify-between h-full glass-card overflow-hidden rounded-3xl transition duration-300 hover:-translate-y-2">
-      <div className="relative">
-        <Link to={detailsPath} className="block overflow-hidden" aria-label={title}>
-          <img src={image} alt={title} className="h-56 w-full object-cover transition duration-500 hover:scale-105" />
-        </Link>
-      </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Box
+        as="article"
+        h="full"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        overflow="hidden"
+        borderRadius="3xl"
+        bg="whiteAlpha.700"
+        backdropFilter="blur(12px)"
+        border="1px solid"
+        borderColor="whiteAlpha.500"
+        boxShadow="0 24px 64px rgba(8,42,62,0.18)"
+        _hover={{
+          boxShadow: '0 36px 100px rgba(8,42,62,0.24)',
+          transform: 'translateY(-8px)',
+        }}
+        transition="all 0.3s"
+      >
+        <Box position="relative">
+          <Link to={detailsPath}>
+            <Image
+              src={image}
+              alt={title}
+              h="224px"
+              w="full"
+              objectFit="cover"
+              transition="transform 0.5s"
+              sx={{
+                '&:hover': { transform: 'scale(1.05)' },
+              }}
+            />
+          </Link>
+        </Box>
 
-      <div className="space-y-5 p-6">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
-          {showDetailsLink && (
-            <Link to={detailsPath} className="text-sm font-semibold text-teal-700 hover:text-teal-900">
-              <FormattedMessage id="details.view" defaultMessage="View details" />
-            </Link>
-          )}
-        </div>
-        <MarkdownRenderer content={description} />
+        <VStack p={6} spacing={5} align="stretch">
+          <HStack justify="space-between" gap={3}>
+            <Heading as="h3" size="xl" color="slate.900">
+              {title}
+            </Heading>
+            {showDetailsLink && (
+              <Link to={detailsPath}>
+                <Text fontSize="sm" fontWeight="semibold" color="teal.700" _hover={{ color: 'teal.900' }}>
+                  <FormattedMessage id="details.view" defaultMessage="View details" />
+                </Text>
+              </Link>
+            )}
+          </HStack>
+          
+          <MarkdownRenderer content={description} />
 
-        {showPrice && (
-          <div className="flex flex-wrap gap-2">
-            {resolvedPricingOptions.map((option) => (
-              <span
-                key={`${title}-${option.tier}`}
-                className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700"
-              >
-                {option.tier}: {option.price}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {enabled && (
-          <>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {showPrice && (
+            <HStack wrap="wrap" gap={2}>
               {resolvedPricingOptions.map((option) => (
-                <label key={option.tier} className="space-y-2 rounded-2xl border border-slate-200 bg-slate-50 p-3">
-                  <span className="block text-sm font-semibold text-slate-700">{option.tier}</span>
-                  <input
-                    type="number"
-                    min="0"
-                    value={quantities[option.tier] ?? 0}
-                    onChange={(event) => handleQuantityChange(option.tier, event.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-700 outline-none focus:border-teal-500"
-                  />
-                </label>
+                <Badge
+                  key={`${title}-${option.tier}`}
+                  borderRadius="full"
+                  bg="slate.100"
+                  px={3}
+                  py={1}
+                  fontSize="sm"
+                  fontWeight="semibold"
+                  color="slate.700"
+                >
+                  {option.tier}: {option.price}
+                </Badge>
               ))}
-            </div>
+            </HStack>
+          )}
 
-            <label className="block space-y-2 text-left">
-              <span className="text-sm font-medium text-slate-700">
-                <FormattedMessage id="tours.dateLabel" defaultMessage="Select your preferred date" />
-              </span>
-              <input
-                type="date"
-                value={selectedDate}
-                onChange={(event) => setSelectedDate(event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-700 shadow-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
-              />
-            </label>
+          {enabled && (
+            <>
+              <VStack spacing={3}>
+                {resolvedPricingOptions.map((option) => (
+                  <FormControl key={option.tier}>
+                    <FormLabel fontSize="sm" fontWeight="semibold" color="slate.700">
+                      {option.tier}
+                    </FormLabel>
+                    <Input
+                      type="number"
+                      min="0"
+                      value={quantities[option.tier] ?? 0}
+                      onChange={(event) => handleQuantityChange(option.tier, event.target.value)}
+                      borderRadius="xl"
+                      borderColor="slate.200"
+                      bg="white"
+                      _focus={{ borderColor: 'teal.500' }}
+                    />
+                  </FormControl>
+                ))}
+              </VStack>
 
-            <div className="rounded-2xl bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-900">
-              <FormattedMessage id="payment.total" defaultMessage="Payment total" />: {totalAmount > 0 ? `$${totalAmount}` : price}
-            </div>
+              <FormControl>
+                <FormLabel fontSize="sm" fontWeight="medium" color="slate.700">
+                  <FormattedMessage id="tours.dateLabel" defaultMessage="Select your preferred date" />
+                </FormLabel>
+                <Input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(event) => setSelectedDate(event.target.value)}
+                  borderRadius="2xl"
+                  borderColor="slate.200"
+                  bg="white"
+                  px={4}
+                  py={3}
+                  boxShadow="sm"
+                  _focus={{ borderColor: 'teal.500', ring: 2, ringColor: 'teal.200' }}
+                />
+              </FormControl>
 
-            <div className="space-y-3">
-              <button onClick={handleBookNow} className="tropical-button w-full">
-                <FormattedMessage id="tours.bookNow" />
-              </button>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {paypalHref && (
-                  <a
-                    href={paypalHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="tropical-button-outline w-full text-center"
-                  >
-                    <FormattedMessage id="payment.paypal" defaultMessage="Pay with PayPal" />
-                  </a>
-                )}
-                {verifoneHref && (
-                  <a
-                    href={verifoneHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="tropical-button-outline w-full text-center"
-                  >
-                    <FormattedMessage id="payment.verifone" defaultMessage="Pay with Verifone" />
-                  </a>
-                )}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </article>
+              <Box
+                borderRadius="2xl"
+                bg="teal.50"
+                px={4}
+                py={3}
+                fontSize="sm"
+                fontWeight="semibold"
+                color="teal.900"
+              >
+                <FormattedMessage id="payment.total" defaultMessage="Payment total" />:{' '}
+                {totalAmount > 0 ? `$${totalAmount}` : price}
+              </Box>
+
+              <VStack spacing={3}>
+                <Button
+                  onClick={handleBookNow}
+                  w="full"
+                  bgGradient="linear(to-r, teal.600, cyan.500)"
+                  color="white"
+                  fontWeight="semibold"
+                  borderRadius="xl"
+                  _hover={{ boxShadow: 'lg', transform: 'translateY(-2px)' }}
+                  transition="all 0.2s"
+                >
+                  <FormattedMessage id="tours.bookNow" />
+                </Button>
+                <HStack w="full" spacing={3}>
+                  {paypalHref && (
+                    <Button
+                      as="a"
+                      href={paypalHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      w="full"
+                      variant="outline"
+                      borderColor="teal.600"
+                      color="teal.700"
+                      borderRadius="xl"
+                      _hover={{ bg: 'teal.50' }}
+                    >
+                      <FormattedMessage id="payment.paypal" defaultMessage="Pay with PayPal" />
+                    </Button>
+                  )}
+                  {verifoneHref && (
+                    <Button
+                      as="a"
+                      href={verifoneHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      w="full"
+                      variant="outline"
+                      borderColor="teal.600"
+                      color="teal.700"
+                      borderRadius="xl"
+                      _hover={{ bg: 'teal.50' }}
+                    >
+                      <FormattedMessage id="payment.verifone" defaultMessage="Pay with Verifone" />
+                    </Button>
+                  )}
+                </HStack>
+              </VStack>
+            </>
+          )}
+        </VStack>
+      </Box>
+    </motion.div>
   );
 };
 

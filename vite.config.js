@@ -9,14 +9,17 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     chunkSizeWarningLimit: 2000,
-    minify: false, // Disable minification to reduce memory usage during build
-    sourcemap: false, // Disable sourcemaps for production to reduce build size
+    minify: 'esbuild',
+    sourcemap: false,
+    target: 'esnext',
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
           'chakra-vendor': ['@chakra-ui/react', '@emotion/react', '@emotion/styled'],
           'framer-motion': ['framer-motion'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'intl-vendor': ['react-intl'],
         },
       },
     },
@@ -26,5 +29,6 @@ export default defineConfig({
   },
   esbuild: {
     pure: ['console.log'],
+    legalComments: 'none',
   },
 });

@@ -5,17 +5,20 @@
   "description": "A frontend-only e-commerce website for a tour vendor in the Dominican Republic specializing in tropical excursions.",
   "main": "src/main.tsx",
   "scripts": {
-    "dev": "vite",
-    "remotedev": "vite --host",
+    "dev": "NODE_OPTIONS='--max-old-space-size=4096' vite",
+    "remotedev": "NODE_OPTIONS='--max-old-space-size=4096' vite --host",
     "generate-sitemap": "node scripts/generate-sitemap.mjs",
     "populate-local-data": "node scripts/populate-local-data.mjs",
-    "build": "npm run generate-sitemap && npm run populate-local-data && vite build",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' npm run generate-sitemap && NODE_OPTIONS='--max-old-space-size=4096' npm run populate-local-data && NODE_OPTIONS='--max-old-space-size=4096' vite build",
     "init-cloudflare-data": "node scripts/init-cloudflare-data.mjs",
     "trigger-init-data": "node scripts/trigger-init-data.mjs",
     "serve": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/alert": "^2.2.2",
+    "@chakra-ui/form-control": "^2.2.0",
     "@chakra-ui/react": "^3.36.0",
+    "@chakra-ui/system": "^2.6.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@uiw/react-md-editor": "^4.1.1",
