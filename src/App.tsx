@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Box, Flex } from '@chakra-ui/react';
 import Home from './pages/Home';
 import Tours from './pages/Tours';
 import Contact from './pages/Contact';
@@ -16,10 +17,10 @@ import ScrollToHash from './components/ScrollToHash';
 const App = () => {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <Flex direction="column" minH="100vh">
         <ScrollToHash />
         <Header />
-        <main id="top" className="flex-grow">
+        <Box as="main" id="top" flex="1">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/tours" element={<Tours />} />
@@ -30,9 +31,9 @@ const App = () => {
             <Route path="/admin" element={<ProtectedRoute component={Admin} />} />
             <Route path="/admin/transport" element={<ProtectedRoute component={AdminTransport} />} />
           </Routes>
-        </main>
+        </Box>
         <Footer />
-      </div>
+      </Flex>
     </Router>
   );
 };
