@@ -9,6 +9,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     chunkSizeWarningLimit: 2000,
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -18,5 +19,11 @@ export default defineConfig({
         },
       },
     },
+  },
+  optimizeDeps: {
+    include: ['@chakra-ui/react', '@emotion/react', '@emotion/styled', 'framer-motion'],
+  },
+  esbuild: {
+    pure: ['console.log'],
   },
 });
