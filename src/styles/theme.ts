@@ -70,6 +70,33 @@ export const config = defineConfig({
         body: { value: '"Inter", "system-ui", sans-serif' },
         mono: { value: '"JetBrains Mono", monospace' },
       },
+      radii: {
+        sm: { value: '8px' },
+        md: { value: '12px' },
+        lg: { value: '16px' },
+        xl: { value: '20px' },
+        '2xl': { value: '28px' },
+        '3xl': { value: '32px' },
+        full: { value: '9999px' },
+      },
+      spacing: {
+        xs: { value: '8px' },
+        sm: { value: '12px' },
+        md: { value: '16px' },
+        lg: { value: '24px' },
+        xl: { value: '32px' },
+        '2xl': { value: '40px' },
+        '3xl': { value: '48px' },
+        '4xl': { value: '64px' },
+      },
+    },
+    semanticTokens: {
+      colors: {
+        text: {
+          primary: { value: { base: 'gray.900', _dark: 'white' } },
+          secondary: { value: { base: 'gray.600', _dark: 'gray.300' } },
+        },
+      },
     },
   },
 });
