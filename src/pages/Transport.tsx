@@ -270,7 +270,7 @@ const Transport: React.FC = () => {
   if (loading) {
     return (
       <Flex minH="100vh" justify="center" align="center">
-        <Spinner size="xl" color="brand.orange" />
+        <Spinner size="xl" color="brand.500" />
       </Flex>
     );
   }

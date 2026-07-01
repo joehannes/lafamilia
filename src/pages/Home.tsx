@@ -210,7 +210,7 @@ const Home: React.FC = () => {
         <Box
           px={{ base: 4, md: 8 }}
           py={{ base: 20, sm: 24 }}
-          bgGradient="linear(to-r, pink.600, orange.500)"
+          bgGradient="linear(to-r, pink.600, rose.500)"
           color="white"
         >
           <Container maxW="4xl" textAlign="center">
@@ -273,7 +273,7 @@ const Home: React.FC = () => {
         <Box
           px={{ base: 4, md: 8 }}
           py={{ base: 20, sm: 24 }}
-          bgGradient="linear(to-r, pink.600, orange.500)"
+          bgGradient="linear(to-r, pink.600, rose.500)"
           color="white"
         >
           <Container maxW="4xl" textAlign="center">

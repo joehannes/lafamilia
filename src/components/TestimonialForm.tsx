@@ -25,7 +25,7 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSubmit, isLoading =
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 bg-gradient-to-br from-orange-50 to-pink-50 rounded-2xl border-2 border-orange-200 shadow-lg">
+    <div className="w-full max-w-2xl mx-auto p-6 bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl border-2 border-rose-200 shadow-lg">
       <h3 className="text-2xl font-bold text-slate-900 mb-4 text-center">
         <FormattedMessage id="testimonials.addTestimonial" />
       </h3>
@@ -64,7 +64,7 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSubmit, isLoading =
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+            className="w-full px-4 py-2 border-2 border-rose-200 rounded-lg focus:outline-none focus:border-rose-500"
           />
         </div>
 
@@ -75,7 +75,7 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSubmit, isLoading =
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
-            className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+            className="w-full px-4 py-2 border-2 border-rose-200 rounded-lg focus:outline-none focus:border-rose-500"
           />
         </div>
 
@@ -89,7 +89,7 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSubmit, isLoading =
             placeholder="Share your adventure story..."
             rows={4}
             maxLength={500}
-            className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:outline-none focus:border-orange-500 resize-none"
+            className="w-full px-4 py-2 border-2 border-rose-200 rounded-lg focus:outline-none focus:border-rose-500 resize-none"
           />
           <p className="text-xs text-slate-500 mt-1">{review.length}/500 characters</p>
         </div>
@@ -97,7 +97,7 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSubmit, isLoading =
         <button
           type="submit"
           disabled={isLoading || !review.trim() || !name.trim() || !email.trim()}
-          className="w-full py-3 px-4 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-3 px-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? 'Sharing...' : <FormattedMessage id="testimonials.submitReview" />}
         </button>

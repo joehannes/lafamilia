@@ -183,7 +183,7 @@ const StorySection: React.FC<StorySectionProps> = ({
             {/* Video (if we also have an image, video goes here below the text) */}
             {vimeoUrl && imageUrl && (
               <div className="mt-8 story-media-frame flex justify-center w-full">
-                <div className="absolute -inset-2 rounded-[20px] bg-gradient-to-r from-teal-300 via-amber-200 to-orange-300 opacity-60 blur-xl transition duration-700 group-hover:opacity-90" />
+                <div className="absolute -inset-2 rounded-[20px] bg-gradient-to-r from-teal-300 via-pink-200 to-rose-300 opacity-60 blur-xl transition duration-700 group-hover:opacity-90" />
                 {isTikTok ? (
                   hasLoaded ? (
                     <div className="relative z-10 w-full overflow-hidden rounded-[18px]">
@@ -215,7 +215,7 @@ const StorySection: React.FC<StorySectionProps> = ({
           {(imageUrl || (!imageUrl && vimeoUrl)) && (
             <div className={`${isAlternate ? 'md:order-1' : 'md:order-2'} ${id === 'decision' ? 'md:mt-12' : ''}`}>
               <div className={`story-media-frame group mb-10 md:mb-0 ${id === 'afternoon_post' ? 'mt-12 md:mt-0' : ''}`}>
-                <div className="absolute -inset-2 rounded-[30px] bg-gradient-to-r from-teal-300 via-amber-200 to-orange-300 opacity-60 blur-xl transition duration-700 group-hover:opacity-90 sm:rounded-[34px]" />
+                <div className="absolute -inset-2 rounded-[30px] bg-gradient-to-r from-teal-300 via-pink-200 to-rose-300 opacity-60 blur-xl transition duration-700 group-hover:opacity-90 sm:rounded-[34px]" />
                 {imageUrl ? (
                   <img
                     src={imageUrl}
