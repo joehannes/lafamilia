@@ -1,7 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
-import { IconButton } from '@chakra-ui/react';
 import { useBrand } from '../contexts/BrandContext';
 import { generateWhatsAppMessage } from '../utils/whatsapp';
 
@@ -22,37 +20,14 @@ const FABWhatsApp: React.FC<FABWhatsAppProps> = ({
   };
 
   return (
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ delay: 0.5, type: "spring", stiffness: 400 }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-      style={{
-        position: 'fixed',
-        bottom: '1.5rem',
-        right: '1.5rem',
-        zIndex: 50,
-      }}
+    <button
+      onClick={handleClick}
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 hover:shadow-xl transition-all duration-300 hover:scale-110 animate-pulse"
+      aria-label="Contact via WhatsApp"
+      title="Chat with us on WhatsApp"
     >
-      <IconButton
-        aria-label="Contact via WhatsApp"
-        title="Chat with us on WhatsApp"
-        onClick={handleClick}
-        icon={<FaWhatsapp size="32px" />}
-        w={16}
-        h={16}
-        borderRadius="full"
-        bg="green.500"
-        color="white"
-        boxShadow="lg"
-        _hover={{
-          bg: 'green.600',
-          boxShadow: 'xl',
-        }}
-        transition="all 0.3s"
-      />
-    </motion.div>
+      <FaWhatsapp className="w-8 h-8" />
+    </button>
   );
 };
 

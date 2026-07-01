@@ -5,24 +5,17 @@
   "description": "A frontend-only e-commerce website for a tour vendor in the Dominican Republic specializing in tropical excursions.",
   "main": "src/main.tsx",
   "scripts": {
-    "dev": "NODE_OPTIONS='--max-old-space-size=4096' vite",
-    "remotedev": "NODE_OPTIONS='--max-old-space-size=4096' vite --host",
+    "dev": "vite",
+    "remotedev": "vite --host",
     "generate-sitemap": "node scripts/generate-sitemap.mjs",
     "populate-local-data": "node scripts/populate-local-data.mjs",
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' npm run generate-sitemap && NODE_OPTIONS='--max-old-space-size=4096' npm run populate-local-data && NODE_OPTIONS='--max-old-space-size=4096' vite build",
+    "build": "npm run generate-sitemap && npm run populate-local-data && vite build",
     "init-cloudflare-data": "node scripts/init-cloudflare-data.mjs",
     "trigger-init-data": "node scripts/trigger-init-data.mjs",
     "serve": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/alert": "^2.2.2",
-    "@chakra-ui/form-control": "^2.2.0",
-    "@chakra-ui/react": "^3.36.0",
-    "@chakra-ui/system": "^2.6.2",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
     "@uiw/react-md-editor": "^4.1.1",
-    "framer-motion": "^12.42.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^5.5.0",
@@ -30,13 +23,16 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.10.1",
     "remark-gfm": "^4.0.1",
+    "tailwindcss": "^3.0.0",
     "typescript": "^4.0.0",
     "vite": "^4.5.14"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^5.1.2",
+    "autoprefixer": "^10.0.0",
     "postcss": "^8.0.0"
   },
   "keywords": [

@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  Box,
-  VStack,
-  HStack,
-  Heading,
-  Text,
-  Button,
-  Container,
-  SimpleGrid,
-} from '@chakra-ui/react';
 import Hero from '../components/Hero';
 import StorySection from '../components/StorySection';
 import AdventureCard from '../components/AdventureCard';
@@ -81,7 +70,7 @@ const Home: React.FC = () => {
   }, [locale, seoArticles]);
 
   return (
-    <Box id="top" position="relative">
+    <div id="top" className="relative">
       {/* FAB WhatsApp Button */}
       <FABWhatsApp phoneNumber={brandSettings.phoneNumber} />
 
@@ -90,97 +79,62 @@ const Home: React.FC = () => {
 
       {seoArticles.length > 0 && (
         <section aria-hidden="true" style={hiddenBlogStyle}>
-          <Heading size="lg">{locale === 'es' ? 'Blog' : 'Blog'}</Heading>
+          <h2>{locale === 'es' ? 'Blog' : 'Blog'}</h2>
           {seoArticles.map((article) => (
-            <Box as="article" key={article.id}>
-              <Heading size="md">{article.title}</Heading>
-              <Text>{article.post.slice(0, 180)}</Text>
-            </Box>
+            <article key={article.id}>
+              <h3>{article.title}</h3>
+              <p>{article.post.slice(0, 180)}</p>
+            </article>
           ))}
         </section>
       )}
 
       {/* Story Narrative Sections */}
-      <VStack spacing={0} minH="50vh" align="stretch">
+      <div className="space-y-0 min-h-[50vh]">
         {!storyData ? (
-          <Box
-            py={32}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            bgGradient="linear(to-b, teal.50, teal.100)"
-          >
-            <VStack align="center" gap={6} className="animate-pulse">
-              <Box w={16} h={16} borderRadius="full" bg="teal.800/10" />
-              <Text fontSize="2xl" color="teal.900/40" fontWeight="bold">
-                Loading your tropical journey...
-              </Text>
-            </VStack>
-          </Box>
+          <section className="home-section shore-section py-32 flex justify-center items-center">
+            <div className="flex flex-col items-center gap-6 animate-pulse">
+              <div className="w-16 h-16 rounded-full bg-teal-800/10" />
+              <div className="text-2xl text-teal-900/40 font-bold font-lobster">Loading your tropical journey...</div>
+            </div>
+          </section>
         ) : (
           storyData.sections.map((section, index) => {
             if (section.id === 'adventure_preview') {
               // Adventure preview section with cards
               return (
-                <Box
+                <section
                   key={section.id}
                   id={section.id}
-                  position="relative"
-                  overflow="hidden"
-                  px={{ base: 4, md: 8 }}
-                  py={{ base: 24, sm: 28, lg: 32 }}
-                  bgGradient="linear(to-b, teal.100, cyan.50)"
+                  className="home-section lagoon-section relative overflow-hidden px-4 py-24 sm:py-28 md:px-8 lg:py-32"
                 >
-                  {/* Parallax wash elements */}
-                  <Box className="parallax-wash parallax-wash-left" />
-                  <Box className="parallax-wash parallax-wash-right" />
+                  <div className="parallax-wash parallax-wash-left" />
+                  <div className="parallax-wash parallax-wash-right" />
 
-                  <Container maxW="6xl" position="relative" zIndex={10}>
+                  <div className="relative z-10 max-w-6xl mx-auto">
                     {/* Header */}
-                    <VStack
-                      mx="auto"
-                      mb={{ base: 12, sm: 16 }}
-                      maxW="3xl"
-                      textAlign="center"
-                      spacing={4}
-                    >
-                      <Box
-                        fontSize="5xl"
-                        mx="auto"
-                        mb={5}
-                      >
+                    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+                      <div className="section-icon mx-auto mb-5">
                         {section.emoji}
-                      </Box>
-                      <Heading
-                        as="h2"
-                        fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
-                        fontWeight="bold"
-                        lineHeight="tight"
-                        color="slate.950"
-                      >
+                      </div>
+                      <h2 className="mb-4 text-3xl font-bold leading-tight text-slate-950 sm:text-4xl md:text-5xl">
                         {section.title}
-                      </Heading>
-                      <Text
-                        mx="auto"
-                        maxW="2xl"
-                        fontSize={{ base: 'lg', sm: 'xl' }}
-                        lineHeight="tall"
-                        color="slate.600"
-                      >
+                      </h2>
+                      <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
                         {section.description}
-                      </Text>
-                    </VStack>
+                      </p>
+                    </div>
 
                     {/* Adventure cards grid */}
                     {section.adventures && (
-                      <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 7, lg: 8 }}>
+                      <div className="grid gap-7 md:grid-cols-3 lg:gap-8">
                         {section.adventures.map((adventure) => (
                           <AdventureCard key={adventure.id} adventure={adventure} />
                         ))}
-                      </SimpleGrid>
+                      </div>
                     )}
-                  </Container>
-                </Box>
+                  </div>
+                </section>
               );
             }
 
@@ -203,342 +157,167 @@ const Home: React.FC = () => {
             );
           })
         )}
-      </VStack>
+      </div>
 
-      {/* Call-to-Action Banner */}
+      {/* Call-to-Action Banner: prefer dynamic CTAs from storyData.callToActions */}
       {!storyData ? null : storyData.callToActions && storyData.callToActions.length > 0 ? (
-        <Box
-          px={{ base: 4, md: 8 }}
-          py={{ base: 20, sm: 24 }}
-          bgGradient="linear(to-r, pink.600, orange.500)"
-          color="white"
-        >
-          <Container maxW="4xl" textAlign="center">
-            <VStack spacing={6} align="center">
-              <Heading
-                as="h2"
-                fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
-                fontWeight="bold"
-                lineHeight="tight"
-                color="white"
-              >
-                {storyData.storyTitle || 'Ready for Your Perfect Day in Paradise?'}
-              </Heading>
-              {storyData.storyTagline && (
-                <Text
-                  mx="auto"
-                  maxW="2xl"
-                  fontSize={{ base: 'lg', sm: 'xl' }}
-                  lineHeight="tall"
-                  color="whiteAlpha.900"
+        <section className="home-section sunset-section px-4 py-20 text-white sm:py-24 md:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="mb-6 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+              {storyData.storyTitle || 'Ready for Your Perfect Day in Paradise?'}
+            </h2>
+            {storyData.storyTagline && (
+              <p className="mx-auto mb-8 max-w-2xl text-lg leading-8 text-white/90 sm:text-xl">
+                {storyData.storyTagline}
+              </p>
+            )}
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              {storyData.callToActions.map((cta, i) => (
+                <button
+                  key={`${cta.text}-${i}`}
+                  onClick={() => {
+                    if (cta.target?.startsWith('http')) {
+                      window.open(cta.target, '_blank');
+                    } else {
+                      navigate(cta.target || '/');
+                    }
+                  }}
+                  className="px-8 py-4 bg-white text-pink-600 font-bold rounded-lg hover:shadow-xl transition-all hover:scale-105"
                 >
-                  {storyData.storyTagline}
-                </Text>
-              )}
-              <HStack
-                direction={{ base: 'column', sm: 'row' }}
-                justify="center"
-                gap={4}
-              >
-                {storyData.callToActions.map((cta, i) => (
-                  <motion.button
-                    key={`${cta.text}-${i}`}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                    onClick={() => {
-                      if (cta.target?.startsWith('http')) {
-                        window.open(cta.target, '_blank');
-                      } else {
-                        navigate(cta.target || '/');
-                      }
-                    }}
-                    style={{
-                      padding: '1rem 2rem',
-                      backgroundColor: 'white',
-                      color: '#db2777',
-                      fontWeight: 'bold',
-                      borderRadius: '0.5rem',
-                      border: 'none',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {cta.text}
-                  </motion.button>
-                ))}
-              </HStack>
-            </VStack>
-          </Container>
-        </Box>
+                  {cta.text}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
       ) : (
-        <Box
-          px={{ base: 4, md: 8 }}
-          py={{ base: 20, sm: 24 }}
-          bgGradient="linear(to-r, pink.600, orange.500)"
-          color="white"
-        >
-          <Container maxW="4xl" textAlign="center">
-            <VStack spacing={6} align="center">
-              <Heading
-                as="h2"
-                fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
-                fontWeight="bold"
-                lineHeight="tight"
-                color="white"
+        <section className="home-section sunset-section px-4 py-20 text-white sm:py-24 md:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="mb-6 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+              Ready for Your Perfect Day in Paradise?
+            </h2>
+            <p className="mx-auto mb-8 max-w-2xl text-lg leading-8 text-white/90 sm:text-xl">
+              Your adventure is just one click away. Contact us on WhatsApp or choose your adventure below.
+            </p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <button
+                onClick={() =>
+                  window.open(
+                    generateWhatsAppMessage(
+                      brandSettings.phoneNumber,
+                      'Hola! Me gustaría información sobre sus tours.'
+                    ),
+                    '_blank'
+                  )
+                }
+                className="px-8 py-4 bg-white text-pink-600 font-bold rounded-lg hover:shadow-xl transition-all hover:scale-105"
               >
-                Ready for Your Perfect Day in Paradise?
-              </Heading>
-              <Text
-                mx="auto"
-                maxW="2xl"
-                fontSize={{ base: 'lg', sm: 'xl' }}
-                lineHeight="tall"
-                color="whiteAlpha.900"
+                Chat on WhatsApp
+              </button>
+              <button
+                onClick={() => navigate('/tours')}
+                className="px-8 py-4 bg-white/20 border-2 border-white text-white font-bold rounded-lg hover:bg-white/30 transition-all"
               >
-                Your adventure is just one click away. Contact us on WhatsApp or choose your adventure below.
-              </Text>
-              <HStack
-                direction={{ base: 'column', sm: 'row' }}
-                justify="center"
-                gap={4}
-              >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                  onClick={() =>
-                    window.open(
-                      generateWhatsAppMessage(
-                        brandSettings.phoneNumber,
-                        'Hola! Me gustaría información sobre sus tours.'
-                      ),
-                      '_blank'
-                    )
-                  }
-                  style={{
-                    padding: '1rem 2rem',
-                    backgroundColor: 'white',
-                    color: '#db2777',
-                    fontWeight: 'bold',
-                    borderRadius: '0.5rem',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Chat on WhatsApp
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                  onClick={() => navigate('/tours')}
-                  style={{
-                    padding: '1rem 2rem',
-                    backgroundColor: 'rgba(255,255,255,0.2)',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    borderRadius: '0.5rem',
-                    border: '2px solid white',
-                    cursor: 'pointer',
-                  }}
-                >
-                  View Adventures
-                </motion.button>
-              </HStack>
-            </VStack>
-          </Container>
-        </Box>
+                View Adventures
+              </button>
+            </div>
+          </div>
+        </section>
       )}
 
       {/* Testimonials Section */}
       <TestimonialDisplay locale={locale} />
 
       {/* Why Choose Us Section - Enhanced */}
-      <Box
-        px={{ base: 4, md: 8 }}
-        py={{ base: 20, sm: 24 }}
-        bgGradient="linear(to-br, teal.700, cyan.600)"
-        color="white"
-      >
-        <Container maxW="6xl">
-          <VStack
-            mx="auto"
-            mb={{ base: 12, sm: 16 }}
-            maxW="3xl"
-            textAlign="center"
-            spacing={4}
-          >
-            <Heading
-              as="h2"
-              fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
-              fontWeight="bold"
-              lineHeight="tight"
-              color="white"
-            >
+      <section className="home-section reef-section px-4 py-20 text-white sm:py-24 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+            <h2 className="mb-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
               <FormattedMessage id="features.title" />
-            </Heading>
-            <Text fontSize={{ base: 'lg', sm: 'xl' }} lineHeight="tall" color="whiteAlpha.700">
-              Thoughtful service from arrival to return
-            </Text>
-          </VStack>
+            </h2>
+            <p className="text-lg leading-8 text-white/[.78] sm:text-xl">Thoughtful service from arrival to return</p>
+          </div>
 
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, lg: 8 }}>
+          <div className="grid gap-6 md:grid-cols-3 lg:gap-8">
             {/* Safety First */}
-            <motion.div
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Box
-                p={8}
-                borderRadius="2xl"
-                bg="whiteAlpha.100"
-                backdropFilter="blur(12px)"
-                border="1px solid"
-                borderColor="whiteAlpha.200"
-                _hover={{ bg: 'whiteAlpha.200' }}
-                transition="all 0.3s"
-              >
-                <VStack align="start" spacing={3}>
-                  <Box fontSize="5xl">🛡️</Box>
-                  <Heading size="lg" color="white">
-                    <FormattedMessage id="features.safety.title" />
-                  </Heading>
-                  <Text color="slate.300">
-                    <FormattedMessage id="features.safety.description" />
-                  </Text>
-                </VStack>
-              </Box>
-            </motion.div>
+            <div className="home-feature-card group p-8">
+              <div className="text-5xl mb-4">🛡️</div>
+              <h3 className="text-2xl font-bold mb-3">
+                <FormattedMessage id="features.safety.title" />
+              </h3>
+              <p className="text-slate-300">
+                <FormattedMessage id="features.safety.description" />
+              </p>
+            </div>
 
             {/* Curated Experiences */}
-            <motion.div
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Box
-                p={8}
-                borderRadius="2xl"
-                bg="whiteAlpha.100"
-                backdropFilter="blur(12px)"
-                border="1px solid"
-                borderColor="whiteAlpha.200"
-                _hover={{ bg: 'whiteAlpha.200' }}
-                transition="all 0.3s"
-              >
-                <VStack align="start" spacing={3}>
-                  <Box fontSize="5xl">🌿</Box>
-                  <Heading size="lg" color="white">
-                    <FormattedMessage id="features.experiences.title" />
-                  </Heading>
-                  <Text color="slate.300">
-                    <FormattedMessage id="features.experiences.description" />
-                  </Text>
-                </VStack>
-              </Box>
-            </motion.div>
+            <div className="home-feature-card group p-8">
+              <div className="text-5xl mb-4">🌿</div>
+              <h3 className="text-2xl font-bold mb-3">
+                <FormattedMessage id="features.experiences.title" />
+              </h3>
+              <p className="text-slate-300">
+                <FormattedMessage id="features.experiences.description" />
+              </p>
+            </div>
 
             {/* Transportation */}
-            <motion.div
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Box
-                p={8}
-                borderRadius="2xl"
-                bg="whiteAlpha.100"
-                backdropFilter="blur(12px)"
-                border="1px solid"
-                borderColor="whiteAlpha.200"
-                _hover={{ bg: 'whiteAlpha.200' }}
-                transition="all 0.3s"
-              >
-                <VStack align="start" spacing={3}>
-                  <Box fontSize="5xl">🚗</Box>
-                  <Heading size="lg" color="white">
-                    <FormattedMessage id="features.transportation.title" />
-                  </Heading>
-                  <Text color="slate.300">
-                    <FormattedMessage id="features.transportation.description" />
-                  </Text>
-                </VStack>
-              </Box>
-            </motion.div>
-          </SimpleGrid>
-        </Container>
-      </Box>
+            <div className="home-feature-card group p-8">
+              <div className="text-5xl mb-4">🚗</div>
+              <h3 className="text-2xl font-bold mb-3">
+                <FormattedMessage id="features.transportation.title" />
+              </h3>
+              <p className="text-slate-300">
+                <FormattedMessage id="features.transportation.description" />
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA Section */}
-      <Box
-        position="relative"
-        overflow="hidden"
-        px={{ base: 4, md: 8 }}
-        py={{ base: 20, sm: 24 }}
-        bgGradient="linear(to-b, cyan.50, teal.100)"
-      >
-        <Box className="parallax-wash parallax-wash-right" />
+      <section className="home-section dawn-section relative overflow-hidden px-4 py-20 sm:py-24 md:px-8">
+        <div className="parallax-wash parallax-wash-right" />
 
-        <Container maxW="4xl" position="relative" zIndex={10} textAlign="center">
-          <VStack spacing={6} align="center">
-            <Heading
-              as="h2"
-              fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
-              fontWeight="bold"
-              lineHeight="tight"
-              color="slate.900"
-            >
-              Your Caribbean Day Awaits
-            </Heading>
-            <Text
-              mx="auto"
-              maxW="2xl"
-              fontSize={{ base: 'lg', sm: 'xl' }}
-              lineHeight="tall"
-              color="slate.700"
-            >
-              Step into warm water, fresh air, local flavor, and a day that stays with you.
-            </Text>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400 }}
-              onClick={() =>
-                window.open(
-                  generateWhatsAppMessage(
-                    brandSettings.phoneNumber,
-                    'Hola! Quiero hacer una reserva. ¿Cuáles son mis opciones?'
-                  ),
-                  '_blank'
-                )
-              }
-              style={{
-                padding: '1rem 2.5rem',
-                background: 'linear-gradient(to-r, #ec4899, #f97316)',
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '1.125rem',
-                borderRadius: '0.5rem',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
-              }}
-            >
-              Book Your Adventure Now
-            </motion.button>
-          </VStack>
-        </Container>
-      </Box>
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h2 className="mb-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl">
+            Your Caribbean Day Awaits
+          </h2>
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
+            Step into warm water, fresh air, local flavor, and a day that stays with you.
+          </p>
+          <button
+            onClick={() =>
+              window.open(
+                generateWhatsAppMessage(
+                  brandSettings.phoneNumber,
+                  'Hola! Quiero hacer una reserva. ¿Cuáles son mis opciones?'
+                ),
+                '_blank'
+              )
+            }
+            className="px-10 py-4 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-bold text-lg rounded-lg hover:shadow-2xl transition-all hover:scale-105 inline-block"
+          >
+            Book Your Adventure Now
+          </button>
+        </div>
+      </section>
 
       {/* Social Media Videos Section - Only shows if videos exist */}
       <SocialMediaVideos />
 
       {/* SEO: Hidden blog articles for search engine indexing */}
-      <Box display={{ base: 'none' }} h={0} w={0} overflow="hidden">
+      <div className="hidden h-0 w-0 overflow-hidden">
         {blogArticles[locale]?.map((article) => (
-          <Box as="article" key={article.id} data-article-id={article.slug}>
-            <Heading size="md">{article.title}</Heading>
-            {article.tour && <Text>Related tour: {article.tour}</Text>}
+          <article key={article.id} data-article-id={article.slug}>
+            <h3>{article.title}</h3>
+            {article.tour && <p>Related tour: {article.tour}</p>}
             {article.date && <time dateTime={article.date}>{article.date}</time>}
-            <Text>{article.post}</Text>
-          </Box>
+            <p>{article.post}</p>
+          </article>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 
