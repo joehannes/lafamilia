@@ -1,7 +1,7 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
-import { useBrand } from '../contexts/BrandContext';
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
+import { useBrand } from "../contexts/BrandContext";
 
 interface HeroProps {
   backgroundImage: string;
@@ -16,8 +16,8 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage, backgroundVideo }) => {
       className="relative isolate z-20 overflow-hidden bg-deep-ocean shadow-[0_40px_100px_-20px_rgba(24,50,74,0.7)]"
       style={{
         backgroundImage: `url('${backgroundImage}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {backgroundVideo && (
@@ -36,7 +36,13 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage, backgroundVideo }) => {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,.22),transparent_22%),radial-gradient(circle_at_90%_82%,rgba(240,199,109,.22),transparent_28%)]" />
 
       <div className="section-shell flex min-h-[88vh] items-center py-24 md:py-28">
-        <div className="hero-glass max-w-3xl p-8 md:p-12" style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(16px)' }}>
+        <div
+          className="hero-glass max-w-3xl p-8 md:p-12"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
+            backdropFilter: "blur(16px)",
+          }}
+        >
           <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-white/70">
             <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
             Stylish, easy planning · local concierge care
@@ -45,7 +51,10 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage, backgroundVideo }) => {
             Bavaro · Punta Cana · Dominican Republic
           </p>
           <h1 className="mb-6 text-4xl font-bold leading-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl">
-            <FormattedMessage id="hero.title" values={{ brand: brandSettings.brandName }} />
+            <FormattedMessage
+              id="hero.title"
+              values={{ brand: brandSettings.brandName }}
+            />
           </h1>
           <p className="mb-8 max-w-2xl text-lg leading-8 text-slate-700 md:text-xl">
             <FormattedMessage id="hero.subtitle" />
