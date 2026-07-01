@@ -94,7 +94,7 @@ const TestimonialDisplay: React.FC<TestimonialDisplayProps> = ({ locale }) => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-2xl border-2 border-dashed border-orange-200">
+          <div className="text-center py-12 bg-white rounded-2xl border-2 border-dashed border-rose-200">
             <p className="text-slate-500 text-lg">
               <FormattedMessage id="testimonials.noTestimonials" />
             </p>

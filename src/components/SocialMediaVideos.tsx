@@ -229,7 +229,7 @@ const SocialMediaVideos: React.FC<SocialMediaVideosProps> = ({ showIf = true }) 
                           mt="auto"
                           py={3}
                           px={4}
-                          bgGradient="linear(to-r, pink.500, orange.500)"
+                          bgGradient="linear(to-r, pink.500, rose.500)"
                           color="white"
                           fontWeight="bold"
                           borderRadius="xl"

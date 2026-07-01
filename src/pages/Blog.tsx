@@ -59,7 +59,7 @@ const Blog = () => {
   }, [locale, brandSettings.brandName, articles]);
 
   return (
-    <div className="bg-gradient-to-b from-white via-cyan-50/30 to-orange-50/30 py-16 md:py-24">
+    <div className="bg-gradient-to-b from-white via-cyan-50/30 to-rose-50/30 py-16 md:py-24">
       <div className="section-shell">
         <div className="mb-16 text-center">
           <h1 className="mb-6 text-5xl font-bold text-slate-900 md:text-6xl font-['Playfair_Display',serif] tracking-tight relative inline-block">
