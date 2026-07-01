@@ -28,8 +28,8 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 py-16 text-slate-100 shadow-[inset_0_0_80px_rgba(0,0,0,0.3)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(255,214,126,.12),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(125,211,252,.12),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(23,182,168,.08),transparent_60%)]" />
+    <footer className="relative overflow-hidden border-t border-white/20 bg-gradient-to-br from-[#18324a] via-[#224e62] to-[#4d5b6d] py-16 text-slate-100 shadow-[inset_0_0_80px_rgba(0,0,0,0.22)]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(240,199,109,.14),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(241,108,138,.12),transparent_34%),radial-gradient(circle_at_50%_50%,rgba(88,183,200,.12),transparent_60%)]" />
       <div className="section-shell relative z-10">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div>
