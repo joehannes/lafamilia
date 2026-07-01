@@ -8,7 +8,7 @@
 }
 
 html {
-  background: linear-gradient(180deg, #fff8f0 0%, #ffedd5 100%);
+  background: linear-gradient(180deg, #fff5f7 0%, #ffe4e9 50%, #e8f4f8 100%);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,22 +20,24 @@ body {
   font-family: "Inter", "system-ui", sans-serif;
 }
 
-/* Custom scrollbar for adventurous feel */
+/* Custom scrollbar with feminine Canadian colors */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffedd5;
+  background: linear-gradient(180deg, #fce7f0, #e0f2fe);
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #f97316, #ea580c);
-  border-radius: 5px;
+  background: linear-gradient(180deg, #f472b6, #fb7185, #f9a8d4);
+  border-radius: 6px;
+  border: 2px solid #fff;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ea580c, #c2410c);
+  background: linear-gradient(180deg, #ec4899, #f43f5e, #fb7185);
 }
 
 /* Reduced motion support */
@@ -47,4 +49,310 @@ body {
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
   }
+}
+
+/* ============================================
+   CANADIAN FEMININE DESIGN ENHANCEMENTS
+   ============================================ */
+
+/* Maple Leaf Decorative Pattern */
+.maple-leaf-pattern {
+  position: absolute;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23dc2626' d='M50 0c5 15-10 25-10 35 0 5 5 10 10 10s10-5 10-10c0-10-15-20-10-35zm-20 25c10 10 5 25 15 30 5 2 10-2 10-7 0-8-15-13-25-23zm40 0c-10 10-5 25-15 30-5 2-10-2-10-7 0-8 15-13 25-23zM15 45c15 0 25 15 35 15 5 0 8-5 5-10-5-8-25-10-40-5zm70 0c-15 0-25 15-35 15-5 0-8-5-5-10 5-8 25-10 40-5zM30 65c10 10 5 25 20 25 8 0 12-8 8-15-5-8-18-12-28-10zm40 0c-10 10-5 25-20 25-8 0-12-8-8-15 5-8 18-12 28-10zM50 90c5 5 0 10-5 10s-10-5-5-10c2-2 3-2 5-2s3 0 5 2z'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+/* Elegant Wave Dividers */
+.wave-divider-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath fill='%23fce7f0' fill-opacity='0.8' d='M0,32C120,10,240,50,360,40C480,30,600,10,720,20C840,30,960,50,1080,40C1200,30,1320,10,1440,30L1440,60L0,60Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.wave-divider-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath fill='%23fce7f0' fill-opacity='0.8' d='M0,30C120,50,240,30,360,40C480,50,600,30,720,20C840,10,960,30,1080,40C1200,50,1320,10,1440,32L1440,0L0,0Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Floating Bubble Ornaments */
+.bubble-ornament {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(244, 114, 182, 0.2));
+  box-shadow: 0 4px 20px rgba(244, 114, 182, 0.3), inset 0 2px 10px rgba(255, 255, 255, 0.5);
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.bubble-ornament:nth-child(odd) {
+  animation-delay: -3s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Parallax Wash Elements - Enhanced with Canadian Feminine Colors */
+.parallax-wash {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 800px;
+  max-height: 800px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.3s ease-out;
+}
+
+.parallax-wash-left {
+  left: -20vw;
+  top: -10vw;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, rgba(244, 114, 182, 0.2) 50%, transparent 70%);
+  animation: pulse-pink 8s ease-in-out infinite;
+}
+
+.parallax-wash-right {
+  right: -20vw;
+  bottom: -10vw;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, rgba(125, 211, 252, 0.2) 50%, transparent 70%);
+  animation: pulse-blue 10s ease-in-out infinite;
+}
+
+@keyframes pulse-pink {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.1); opacity: 0.25; }
+}
+
+@keyframes pulse-blue {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.15); opacity: 0.22; }
+}
+
+/* Scribble Title Background Effect */
+.scribble-title-bg {
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+}
+
+.scribble-title-bg::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: -8px;
+  right: -8px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath stroke='%23f472b6' stroke-width='3' fill='none' stroke-linecap='round' d='M5,15 Q25,5 45,15 T85,15 T125,15 T165,15 T195,15' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Story Copy Card Enhancement */
+.story-copy-card {
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(253, 224, 232, 0.6));
+  border-radius: 24px;
+  border: 1px solid rgba(244, 114, 182, 0.2);
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.story-copy-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 4rem;
+  color: #f472b6;
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* Story Media Frame with Glow */
+.story-media-frame {
+  position: relative;
+  display: inline-block;
+}
+
+.story-media-frame::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(56, 189, 248, 0.2), rgba(251, 113, 133, 0.3));
+  z-index: -1;
+  filter: blur(16px);
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+.story-media-frame:hover::after {
+  opacity: 1;
+}
+
+/* Section Icon Bounce Animation */
+.section-icon {
+  display: inline-block;
+  animation: gentle-bounce 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(236, 72, 153, 0.3));
+}
+
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(-3deg); }
+  75% { transform: translateY(-4px) rotate(3deg); }
+}
+
+/* Typography Enhancements */
+.heading-feminine {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #be185d, #db2777, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-elegant {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+}
+
+/* Canadian Maple Accent Border */
+.maple-border {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, #dc2626, #f472b6, #38bdf8) border-box;
+  border-radius: 16px;
+}
+
+/* Gradient Text Utility */
+.gradient-text-rose {
+  background: linear-gradient(135deg, #f472b6, #fb7185, #f9a8d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-ocean {
+  background: linear-gradient(135deg, #06b6d4, #0ea5e9, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-maple {
+  background: linear-gradient(135deg, #dc2626, #ef4444, #f87171);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Soft Shadow Cards */
+.card-soft-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(236, 72, 153, 0.1),
+    0 10px 20px -2px rgba(236, 72, 153, 0.1),
+    0 20px 40px -4px rgba(56, 189, 248, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card-soft-shadow:hover {
+  box-shadow: 
+    0 10px 15px -3px rgba(236, 72, 153, 0.15),
+    0 20px 30px -4px rgba(236, 72, 153, 0.15),
+    0 30px 50px -6px rgba(56, 189, 248, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Decorative Corner Flourishes */
+.corner-flourish {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.corner-flourish-tl {
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath fill='none' stroke='%23f472b6' stroke-width='2' d='M0,30 Q15,0 30,0 Q45,0 60,30'/%3E%3C/svg%3E");
+}
+
+.corner-flourish-br {
+  bottom: 0;
+  right: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath fill='none' stroke='%2338bdf8' stroke-width='2' d='M0,30 Q15,60 30,60 Q45,60 60,30'/%3E%3C/svg%3E");
+  transform: rotate(180deg);
+}
+
+/* Animated Sparkle Effect */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle-animation 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.sparkle::before,
+.sparkle::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.sparkle::before {
+  width: 150%;
+  height: 2px;
+  top: 1px;
+  left: -2px;
+}
+
+.sparkle::after {
+  width: 2px;
+  height: 150%;
+  top: -2px;
+  left: 1px;
+}
+
+@keyframes sparkle-animation {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Snowflake Pattern for Canadian Touch */
+.snowflake-pattern {
+  position: absolute;
+  opacity: 0.08;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%2338bdf8' d='M50 0 L50 100 M0 50 L100 50 M15 15 L85 85 M85 15 L15 85' stroke='%2338bdf8' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='3' fill='%2338bdf8'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
 }
