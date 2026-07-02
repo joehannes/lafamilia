@@ -43,10 +43,6 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage, backgroundVideo }) => {
             backdropFilter: "blur(16px)",
           }}
         >
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-white/70">
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-            Stylish, easy planning · local concierge care
-          </div>
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-slate-700">
             Bavaro · Punta Cana · Dominican Republic
           </p>
@@ -69,20 +65,6 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage, backgroundVideo }) => {
             <Link to="/contact#top" className="tropical-button-outline">
               <FormattedMessage id="contact.title" />
             </Link>
-          </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm text-slate-700 shadow-sm">
-              <div className="font-semibold text-slate-900">24/7</div>
-              <div>support</div>
-            </div>
-            <div className="rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm text-slate-700 shadow-sm">
-              <div className="font-semibold text-slate-900">Luxury</div>
-              <div>small-group flow</div>
-            </div>
-            <div className="rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm text-slate-700 shadow-sm">
-              <div className="font-semibold text-slate-900">Easy</div>
-              <div>booking in minutes</div>
-            </div>
           </div>
         </div>
       </div>

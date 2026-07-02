@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
-import TourCard from '../components/TourCard';
-import { Tour, getTours, getServiceSlug } from '../services/toursService';
-import { useI18n } from '../contexts/I18nContext';
-import { useBrand } from '../contexts/BrandContext';
+import React, { useState, useEffect } from "react";
+import { FormattedMessage } from "react-intl";
+import TourCard from "../components/TourCard";
+import { Tour, getTours, getServiceSlug } from "../services/toursService";
+import { useI18n } from "../contexts/I18nContext";
+import { useBrand } from "../contexts/BrandContext";
 
 const Tours: React.FC = () => {
   const { locale } = useI18n();
@@ -23,7 +23,9 @@ const Tours: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="grid min-h-screen place-items-center">Loading...</div>;
+    return (
+      <div className="grid min-h-screen place-items-center">Loading...</div>
+    );
   }
 
   return (
@@ -33,20 +35,24 @@ const Tours: React.FC = () => {
           <FormattedMessage id="tours.title" />
         </h1>
         <p className="mx-auto mb-12 max-w-2xl text-center text-slate-600">
-          <FormattedMessage id="tours.dynamicSubtitle" values={{ brand: brandSettings.brandName }} />
+          <FormattedMessage
+            id="tours.dynamicSubtitle"
+            values={{ brand: brandSettings.brandName }}
+          />
         </p>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="columns-1 gap-8 sm:columns-2 lg:columns-3 xl:columns-3">
           {tours.map((tour) => (
-            <TourCard
-              key={tour.id}
-              image={tour.image}
-              title={tour.title}
-              description={tour.description}
-              price={tour.price}
-              pricingOptions={tour.pricingOptions}
-              excursionName={tour.title}
-              detailsPath={`/details/tours/${getServiceSlug(tour)}`}
-            />
+            <div key={tour.id} className="mb-8 break-inside-avoid">
+              <TourCard
+                image={tour.image}
+                title={tour.title}
+                description={tour.description}
+                price={tour.price}
+                pricingOptions={tour.pricingOptions}
+                excursionName={tour.title}
+                detailsPath={`/details/tours/${getServiceSlug(tour)}`}
+              />
+            </div>
           ))}
         </div>
       </div>
