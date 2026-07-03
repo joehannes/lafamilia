@@ -1,3 +1,5 @@
+import { DEFAULT_ADMIN_PASSWORD, getStoredAdminPassword } from "./_admin-password";
+
 const RESOURCE_WITH_LOCALE = new Set([
   "blog",
   "i18n",
@@ -133,8 +135,7 @@ export async function onRequest(context: {
     }
 
     if (request.method === "PUT") {
-      const adminPassword =
-        env.ADMIN_PASSWORD || env.VITE_ADMIN_PASSWORD || "mariotours";
+      const adminPassword = await getStoredAdminPassword(env);
       const providedPassword = request.headers.get("X-Admin-Password") || "";
       if (providedPassword !== adminPassword) {
         return createErrorResponse(

@@ -1,10 +1,16 @@
-import { apiGet, apiPut } from './apiClient';
-import { JourneyLocale } from './introStoryService';
+import { apiGet, apiPut } from "./apiClient";
+import { fetchCurrentAdminPassword, getAdminPassword } from "./authStore";
+import { JourneyLocale } from "./introStoryService";
 
-export type StoryElementType = 'title' | 'paragraph' | 'picture' | 'video' | 'cta';
-export type VideoOrientation = 'vertical' | 'horizontal';
-export type VideoSource = 'vimeo' | 'tiktok' | 'youtube' | 'custom';
-export type CTAButtonVariant = 'primary' | 'secondary' | 'outline';
+export type StoryElementType =
+  | "title"
+  | "paragraph"
+  | "picture"
+  | "video"
+  | "cta";
+export type VideoOrientation = "vertical" | "horizontal";
+export type VideoSource = "vimeo" | "tiktok" | "youtube" | "custom";
+export type CTAButtonVariant = "primary" | "secondary" | "outline";
 
 export interface CTAButton {
   id: string;
@@ -37,14 +43,14 @@ export interface StoryElementsData {
 }
 
 const unwrapRecord = (payload: unknown): unknown => {
-  if (!payload || typeof payload !== 'object') {
+  if (!payload || typeof payload !== "object") {
     return payload;
   }
 
   const candidate = payload as { record?: unknown };
   const record = candidate.record;
 
-  if (record && typeof record === 'object' && 'record' in record) {
+  if (record && typeof record === "object" && "record" in record) {
     return (record as { record?: unknown }).record;
   }
 
@@ -52,21 +58,23 @@ const unwrapRecord = (payload: unknown): unknown => {
 };
 
 const isStoryElementsData = (input: unknown): input is StoryElementsData => {
-  if (!input || typeof input !== 'object') {
+  if (!input || typeof input !== "object") {
     return false;
   }
 
   const data = input as Partial<StoryElementsData>;
   return (
-    typeof data.storyTitle === 'string' &&
-    typeof data.storyTagline === 'string' &&
+    typeof data.storyTitle === "string" &&
+    typeof data.storyTagline === "string" &&
     Array.isArray(data.elements)
   );
 };
 
-export const getStoryElements = async (locale: JourneyLocale): Promise<StoryElementsData | null> => {
+export const getStoryElements = async (
+  locale: JourneyLocale,
+): Promise<StoryElementsData | null> => {
   try {
-    const response = await apiGet<unknown>('story-elements', { locale });
+    const response = await apiGet<unknown>("story-elements", { locale });
     const payload = unwrapRecord(response);
     return isStoryElementsData(payload) ? payload : null;
   } catch (error) {
@@ -77,10 +85,10 @@ export const getStoryElements = async (locale: JourneyLocale): Promise<StoryElem
 
 export const saveStoryElements = async (
   data: StoryElementsData,
-  locale: JourneyLocale
+  locale: JourneyLocale,
 ): Promise<boolean> => {
   try {
-    await apiPut('story-elements', data, { locale });
+    await apiPut("story-elements", data, { locale });
     return true;
   } catch (error) {
     console.error(`Failed to save ${locale} story elements:`, error);
@@ -88,25 +96,32 @@ export const saveStoryElements = async (
   }
 };
 
-export const createNewElement = (type: StoryElementType, order: number): StoryElement => ({
+export const createNewElement = (
+  type: StoryElementType,
+  order: number,
+): StoryElement => ({
   id: `element-${Date.now()}`,
   type,
   order,
   content: {},
 });
 
-export const uploadImage = async (file: File, onProgress?: (percent: number) => void): Promise<string> => {
+export const uploadImage = async (
+  file: File,
+  onProgress?: (percent: number) => void,
+): Promise<string> => {
   const formData = new FormData();
-  formData.append('file', file);
-  formData.append('folder', 'story');
+  formData.append("file", file);
+  formData.append("folder", "story");
 
-  const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD ?? 'mariotours';
+  const adminPassword =
+    getAdminPassword() || (await fetchCurrentAdminPassword());
 
   try {
     const xhr = new XMLHttpRequest();
 
     if (onProgress) {
-      xhr.upload.addEventListener('progress', (event) => {
+      xhr.upload.addEventListener("progress", (event) => {
         if (event.lengthComputable) {
           const percentComplete = (event.loaded / event.total) * 100;
           onProgress(percentComplete);
@@ -121,21 +136,21 @@ export const uploadImage = async (file: File, onProgress?: (percent: number) => 
           if (data.secure_url) {
             resolve(data.secure_url);
           } else {
-            reject(new Error('No secure_url in response'));
+            reject(new Error("No secure_url in response"));
           }
         } else {
           reject(new Error(`Upload failed with status ${xhr.status}`));
         }
       };
 
-      xhr.onerror = () => reject(new Error('Upload request failed'));
+      xhr.onerror = () => reject(new Error("Upload request failed"));
 
-      xhr.open('POST', '/api/upload');
-      xhr.setRequestHeader('X-Admin-Password', adminPassword);
+      xhr.open("POST", "/api/upload");
+      xhr.setRequestHeader("X-Admin-Password", adminPassword);
       xhr.send(formData);
     });
   } catch (error) {
-    console.error('Image upload failed:', error);
+    console.error("Image upload failed:", error);
     throw error;
   }
 };

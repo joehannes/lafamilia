@@ -40,7 +40,7 @@ const Header: React.FC = () => {
             )}
           </div>
           <div className="ml-[5.3rem] flex flex-col sm:ml-[6.6rem] lg:ml-[7rem]">
-            <h1 className="text-lg font-semibold text-slate-900 transition group-hover:text-rose-600 sm:text-xl">
+            <h1 className="text-lg font-semibold text-slate-900 sm:text-xl">
               {brandSettings.brandName}
             </h1>
             <p className="hidden text-sm text-slate-500 sm:block">

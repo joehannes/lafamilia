@@ -1,4 +1,4 @@
-import { getAdminPassword } from './authStore';
+import { fetchCurrentAdminPassword, getAdminPassword } from './authStore';
 
 const rawBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim() || '';
 const API_BASE_URL = rawBaseUrl.replace(/\/+$|^\s+|\s+$/g, '');
@@ -59,7 +59,7 @@ export const apiGet = async <T>(resource: string, params?: Record<string, string
   apiFetch<T>(resource, params, { method: 'GET' });
 
 export const apiPut = async <T>(resource: string, body: unknown, params?: Record<string, string | number | boolean>): Promise<T> => {
-  const password = getAdminPassword();
+  const password = getAdminPassword() || await fetchCurrentAdminPassword();
   return apiFetch<T>(resource, params, {
     method: 'PUT',
     body: JSON.stringify(body),

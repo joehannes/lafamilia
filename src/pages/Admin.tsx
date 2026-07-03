@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { getBrandSettings, saveBrandSettings, BrandSettings, uploadBrandIcon } from '../services/brandService';
 import { getTours, saveTours, Tour } from '../services/toursService';
 import { useI18n } from '../contexts/I18nContext';
+import { updateAdminPassword } from '../services/authStore';
 import ServiceAdminPanel from '../components/admin/ServiceAdminPanel';
 import TikTokAdmin from '../components/admin/TikTokAdmin';
 import SocialMediaAdmin from '../components/admin/SocialMediaAdmin';
@@ -20,6 +21,9 @@ const Admin: React.FC = () => {
   });
   const [editingBrand, setEditingBrand] = useState(false);
   const [uploadingIcon, setUploadingIcon] = useState(false);
+  const [adminPasswordInput, setAdminPasswordInput] = useState('');
+  const [savingPassword, setSavingPassword] = useState(false);
+  const [passwordFeedback, setPasswordFeedback] = useState<string | null>(null);
   const [tours, setTours] = useState<Tour[]>([]);
   const [activeSection, setActiveSection] = useState<'brand' | 'tours' | 'transport' | 'story' | 'tiktok' | 'social'>('brand');
 
@@ -216,6 +220,54 @@ const Admin: React.FC = () => {
                   placeholder="Verifone link"
                   className="rounded-2xl border border-slate-200 px-4 py-3 md:col-span-2"
                 />
+                <div className="md:col-span-2 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <h3 className="mb-2 text-sm font-semibold text-slate-700">Admin access password</h3>
+                  <p className="mb-3 text-xs text-slate-500">Set a new admin password here. This updates the Cloudflare-backed password used by the protected admin area.</p>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <input
+                      type="password"
+                      value={adminPasswordInput}
+                      onChange={(event) => {
+                        setAdminPasswordInput(event.target.value);
+                        setPasswordFeedback(null);
+                      }}
+                      placeholder="New admin password"
+                      className="flex-1 rounded-2xl border border-slate-200 px-4 py-3"
+                    />
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const nextPassword = adminPasswordInput.trim();
+                        if (!nextPassword) {
+                          setPasswordFeedback('Please enter a password.');
+                          return;
+                        }
+
+                        setSavingPassword(true);
+                        setPasswordFeedback(null);
+                        try {
+                          await updateAdminPassword(nextPassword);
+                          setAdminPasswordInput('');
+                          setPasswordFeedback('Admin password updated successfully.');
+                        } catch (error) {
+                          console.error('Failed to update admin password:', error);
+                          setPasswordFeedback('Unable to update the admin password right now.');
+                        } finally {
+                          setSavingPassword(false);
+                        }
+                      }}
+                      disabled={savingPassword}
+                      className="rounded-full bg-amber-600 px-5 py-2 font-semibold text-white transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:bg-amber-400"
+                    >
+                      {savingPassword ? 'Updating…' : 'Update password'}
+                    </button>
+                  </div>
+                  {passwordFeedback && (
+                    <p className={`mt-3 text-sm ${passwordFeedback.includes('successfully') ? 'text-emerald-600' : 'text-rose-600'}`}>
+                      {passwordFeedback}
+                    </p>
+                  )}
+                </div>
                 <div className="flex gap-3">
                   <button
                     onClick={async () => {
