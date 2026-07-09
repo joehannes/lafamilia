@@ -11,7 +11,7 @@
  * the production URL.
  */
 
-const API_BASE = process.env.VITE_API_BASE_URL || 'https://bavaro.tours';
+const API_BASE = process.env.VITE_API_BASE_URL || 'https://excursionesyaventura.com';
 const API_PATH = '/api/data';
 
 const RESOURCES_WITH_LOCALE = [
