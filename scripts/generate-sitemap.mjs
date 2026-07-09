@@ -5,7 +5,7 @@ const projectRoot = path.resolve(new URL('..', import.meta.url).pathname);
 const sitemapPath = path.join(projectRoot, 'public', 'sitemap.xml');
 
 const normalizeDomain = (value) => {
-  if (!value) return 'https://bavaro.tours';
+  if (!value) return 'https://excursionesyaventura.com';
   const trimmed = value.trim().replace(/\/$/, '');
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed;
@@ -14,7 +14,7 @@ const normalizeDomain = (value) => {
 };
 
 const siteUrl = normalizeDomain(
-  process.env.SITE_URL || process.env.CLOUDFLARE_PAGES_URL || process.env.CLOUDFLARE_DOMAIN || 'bavaro.tours'
+  process.env.SITE_URL || process.env.CLOUDFLARE_PAGES_URL || process.env.CLOUDFLARE_DOMAIN || 'excursionesyaventura.com'
 );
 
 const slugify = (value) =>
