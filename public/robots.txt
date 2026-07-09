@@ -25,4 +25,4 @@ Allow: *.webp
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://bavaro.tours/sitemap.xml
+Sitemap: https://excursionesyaventura.com/sitemap.xml
